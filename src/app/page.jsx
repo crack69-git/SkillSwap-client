@@ -6,6 +6,7 @@ import { Earth, FilePlus } from "lucide-react";
 import StatUser from "@/Components/Shared/StatUser";
 import FeatureUser from "@/Components/Shared/FeatureUser";
 import TopFreelancer from "@/Components/Shared/TopFreelancer";
+import Ready from "@/Components/Shared/Ready";
 export default function Home() {
   return (
     <div>
@@ -49,6 +50,7 @@ export default function Home() {
       <StatUser></StatUser>
       <FeatureUser></FeatureUser>
       <TopFreelancer></TopFreelancer>
+      <Ready></Ready>
     </div>
   );
 }
