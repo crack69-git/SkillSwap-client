@@ -5,6 +5,7 @@ import heroimg from "@/assests/hero_img.webp";
 import { Earth, FilePlus } from "lucide-react";
 import StatUser from "@/Components/Shared/StatUser";
 import FeatureUser from "@/Components/Shared/FeatureUser";
+import TopFreelancer from "@/Components/Shared/TopFreelancer";
 export default function Home() {
   return (
     <div>
@@ -47,6 +48,7 @@ export default function Home() {
       </div>
       <StatUser></StatUser>
       <FeatureUser></FeatureUser>
+      <TopFreelancer></TopFreelancer>
     </div>
   );
 }
