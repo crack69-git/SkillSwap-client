@@ -1,4 +1,5 @@
 import { Button } from "@heroui/react";
+import Link from "next/link";
 import React from "react";
 
 const NavbarUser = () => {
@@ -11,7 +12,9 @@ const NavbarUser = () => {
           <p>Browse Freelancers</p>
         </div>
 
-        <Button>Login</Button>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
       </div>
     </div>
   );
