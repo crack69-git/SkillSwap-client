@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -13,14 +14,30 @@ import {
   RadioGroup,
   Radio,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 const RegisterPage = () => {
   const [value, setValue] = useState("option1");
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
+    const { data: res, error } = await authClient.signUp.email({
+      name: data.name, // required
+      email: data.email, // required
+      password: data.password, // required
+      image: data.imageLink,
+      role: data.role,
+      callbackURL: "/",
+    });
+    if (res) {
+      alert("signup successful");
+      redirect("/login");
+    } else {
+      alert(error.message);
+      return;
+    }
   };
   return (
     <div>
