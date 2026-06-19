@@ -5,9 +5,10 @@ import Link from "next/link";
 import React from "react";
 
 const NavbarUser = async () => {
-  const { user } = await auth.api.getSession({
+  const { data: session } = await auth.api.getSession({
     headers: await headers(), // headers containing the user's session token
   });
+  const user = session?.user || null;
   // console.log(user);
   return (
     <div className="border-b py-4">
@@ -24,7 +25,7 @@ const NavbarUser = async () => {
               <Link href="/post-task">Dashboard</Link>
             </Button>
             <Separator orientation="vertical" className="min-h-full" />
-            <p>Welcome, {user.email}</p>
+            <p>Welcome, {user.name}</p>
             <Link href="/logout">
               <Button>Logout</Button>
             </Link>
