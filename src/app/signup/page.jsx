@@ -20,6 +20,7 @@ const RegisterPage = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
+    console.log(data);
   };
   return (
     <div>
@@ -53,43 +54,53 @@ const RegisterPage = () => {
             <Label>Image Link</Label>
             <Input placeholder="eg: https://example.com/image.jpg" />
           </TextField>
-          <TextField
-            isRequired
-            minLength={8}
-            name="password"
-            type="password"
-            validate={(value) => {
-              if (value.length < 8) {
-                return "Password must be at least 8 characters";
-              }
-              if (!/[A-Z]/.test(value)) {
-                return "Password must contain at least one uppercase letter";
-              }
-              if (!/[0-9]/.test(value)) {
-                return "Password must contain at least one number";
-              }
-              return null;
-            }}
-          >
+          <TextField isRequired minLength={8} name="password" type="password">
             <Label>Password</Label>
             <Input placeholder="Enter your password" />
-            <Description>
-              Must be at least 8 characters with 1 uppercase and 1 number
-            </Description>
+
             <FieldError />
           </TextField>
-          <div>
-            <input type="radio" id="admin" name="role" value="admin" />
-            <label htmlFor="admin">Admin</label>
-
-            <input
-              type="radio"
-              id="freelancer"
+          <div className="flex flex-col gap-4">
+            <Label>Role</Label>
+            <RadioGroup
+              defaultValue="client"
               name="role"
-              value="freelancer"
-              className="ml-4"
-            />
-            <label htmlFor="Freelancer">Freelancer</label>
+              orientation="horizontal"
+            >
+              <Radio
+                value="client"
+                className="border bg-sky-100 rounded-2xl p-2"
+              >
+                <Radio.Content>
+                  <Radio.Control>
+                    <Radio.Indicator />
+                  </Radio.Control>
+                  Client
+                </Radio.Content>
+              </Radio>
+              <Radio
+                value="freelancer"
+                className="border bg-sky-100 rounded-2xl p-2"
+              >
+                <Radio.Content>
+                  <Radio.Control>
+                    <Radio.Indicator />
+                  </Radio.Control>
+                  Freelancer
+                </Radio.Content>
+              </Radio>
+              <Radio
+                value="admin"
+                className="border bg-sky-100 rounded-2xl p-2"
+              >
+                <Radio.Content>
+                  <Radio.Control>
+                    <Radio.Indicator />
+                  </Radio.Control>
+                  Admin
+                </Radio.Content>
+              </Radio>
+            </RadioGroup>
           </div>
 
           <div className="flex gap-2">
