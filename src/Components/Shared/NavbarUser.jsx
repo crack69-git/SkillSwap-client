@@ -1,8 +1,14 @@
-import { Button } from "@heroui/react";
+import { auth } from "@/lib/auth";
+import { Button, Separator } from "@heroui/react";
+import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
-const NavbarUser = () => {
+const NavbarUser = async () => {
+  const { user } = await auth.api.getSession({
+    headers: await headers(), // headers containing the user's session token
+  });
+  // console.log(user);
   return (
     <div className="border-b py-4">
       <div className="w-11/12 mx-auto flex items-center justify-between ">
@@ -12,9 +18,22 @@ const NavbarUser = () => {
           <p>Browse Freelancers</p>
         </div>
 
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
+        {user ? (
+          <div className="flex items-center gap-4">
+            <Button variant="tertiary" className="">
+              <Link href="/post-task">Dashboard</Link>
+            </Button>
+            <Separator orientation="vertical" className="min-h-full" />
+            <p>Welcome, {user.email}</p>
+            <Link href="/logout">
+              <Button>Logout</Button>
+            </Link>
+          </div>
+        ) : (
+          <Link href="/login">
+            <Button>Login</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

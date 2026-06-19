@@ -1,5 +1,5 @@
 "use client";
-import { Check } from "@gravity-ui/icons";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -10,12 +10,26 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 const page = () => {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
+    // console.log(data);
+    const { data: res, error } = await authClient.signIn.email({
+      email: data.email, // required
+      password: data.password, // required
+      rememberMe: true,
+      callbackURL: "/",
+    });
+    if (res) {
+      alert("Login successful");
+      redirect("/");
+    } else {
+      alert("Login failed! please try again.");
+    }
   };
 
   return (
@@ -40,29 +54,10 @@ const page = () => {
           <Input placeholder="john@example.com" />
           <FieldError />
         </TextField>
-        <TextField
-          isRequired
-          minLength={8}
-          name="password"
-          type="password"
-          validate={(value) => {
-            if (value.length < 8) {
-              return "Password must be at least 8 characters";
-            }
-            if (!/[A-Z]/.test(value)) {
-              return "Password must contain at least one uppercase letter";
-            }
-            if (!/[0-9]/.test(value)) {
-              return "Password must contain at least one number";
-            }
-            return null;
-          }}
-        >
+        <TextField isRequired minLength={8} name="password" type="password">
           <Label>Password</Label>
           <Input placeholder="Enter your password" />
-          <Description>
-            Must be at least 8 characters with 1 uppercase and 1 number
-          </Description>
+
           <FieldError />
         </TextField>
         <div className="flex gap-2">
