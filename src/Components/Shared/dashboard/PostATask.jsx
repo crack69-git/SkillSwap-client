@@ -17,16 +17,28 @@ import {
   Select,
 } from "@heroui/react";
 import { createTask } from "@/lib/actions/tasks";
+import { redirect } from "next/navigation";
 const PostATask = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    const res = await createTask(data);
+    // console.log(data);
+    const tasks = {
+      TaskTitle: data.TaskTitle,
+      category: data.category,
+      budget: data.budget,
+      createdAt: new Date().toISOString(),
+      deadline: data.deadline,
+      status: "Open",
+      description: data.description,
+    };
+
+    const res = await createTask(tasks);
     console.log(res);
-    if (res.acknowledged) {
+    if (res) {
       alert("Task created successfully!");
+      redirect("/dashboard/client/my-tasks");
     } else {
       alert("Failed to create task.");
     }
