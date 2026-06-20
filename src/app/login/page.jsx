@@ -10,9 +10,11 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+
 import { FcGoogle } from "react-icons/fc";
 const page = () => {
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -22,8 +24,9 @@ const page = () => {
       email: data.email, // required
       password: data.password, // required
       rememberMe: true,
-      callbackURL: "/",
+      // callbackURL: "/",
     });
+    console.log("Login response:", res, error);
     if (res) {
       alert("Login successful");
       redirect("/");
@@ -43,6 +46,7 @@ const page = () => {
           isRequired
           name="email"
           type="email"
+          defaultValue="ashu@gmail.com"
           validate={(value) => {
             if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
               return "Please enter a valid email address";
@@ -54,7 +58,13 @@ const page = () => {
           <Input placeholder="john@example.com" />
           <FieldError />
         </TextField>
-        <TextField isRequired minLength={8} name="password" type="password">
+        <TextField
+          isRequired
+          minLength={8}
+          name="password"
+          type="password"
+          defaultValue="12345678"
+        >
           <Label>Password</Label>
           <Input placeholder="Enter your password" />
 
