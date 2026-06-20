@@ -46,7 +46,7 @@ const page = () => {
           isRequired
           name="email"
           type="email"
-          defaultValue="ashu@gmail.com"
+          defaultValue="paresh@gmail.com"
           validate={(value) => {
             if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
               return "Please enter a valid email address";
