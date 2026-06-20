@@ -13,8 +13,11 @@ const DashboardSideBar = () => {
         <Link href="/dashboard/client/post-task">
           <li className="py-2 px-4 hover:bg-gray-200">Post a Task</li>
         </Link>
-        <Link href="/dashboard/client/settings">
-          <li className="py-2 px-4 hover:bg-gray-200">Settings</li>
+        <Link href="/dashboard/client/my-tasks">
+          <li className="py-2 px-4 hover:bg-gray-200">My Tasks</li>
+        </Link>
+        <Link href="/dashboard/client/manage-proposals">
+          <li className="py-2 px-4 hover:bg-gray-200">Manage Proposals</li>
         </Link>
       </ul>
     </>

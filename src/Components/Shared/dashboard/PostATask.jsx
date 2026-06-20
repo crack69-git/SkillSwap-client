@@ -16,37 +16,89 @@ import {
   TextField,
   Select,
 } from "@heroui/react";
+import { createTask } from "@/lib/actions/tasks";
 const PostATask = () => {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
+    const res = await createTask(data);
+    console.log(res);
+    if (res.acknowledged) {
+      alert("Task created successfully!");
+    } else {
+      alert("Failed to create task.");
+    }
   };
   const listbox = (
     <>
-      <ListBox.Item id="florida" textValue="Florida">
-        Florida
+      <ListBox.Item id="web-dev" textValue="Web &amp; App Development">
+        Web &amp; App Development
         <ListBox.ItemIndicator />
       </ListBox.Item>
-      <ListBox.Item id="delaware" textValue="Delaware">
-        Delaware
+
+      <ListBox.Item id="design-creative" textValue="Design &amp; Creative">
+        Design &amp; Creative
         <ListBox.ItemIndicator />
       </ListBox.Item>
-      <ListBox.Item id="california" textValue="California">
-        California
+
+      <ListBox.Item
+        id="writing-translation"
+        textValue="Writing &amp; Translation"
+      >
+        Writing &amp; Translation
         <ListBox.ItemIndicator />
       </ListBox.Item>
-      <ListBox.Item id="texas" textValue="Texas">
-        Texas
+
+      <ListBox.Item id="digital-marketing" textValue="Digital Marketing">
+        Digital Marketing
         <ListBox.ItemIndicator />
       </ListBox.Item>
-      <ListBox.Item id="new-york" textValue="New York">
-        New York
+
+      <ListBox.Item id="video-animation" textValue="Video &amp; Animation">
+        Video &amp; Animation
         <ListBox.ItemIndicator />
       </ListBox.Item>
-      <ListBox.Item id="washington" textValue="Washington">
-        Washington
+
+      <ListBox.Item id="data-ai" textValue="Data Science &amp; AI">
+        Data Science &amp; AI
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+
+      <ListBox.Item
+        id="coaching-education"
+        textValue="Coaching &amp; Education"
+      >
+        Coaching &amp; Education
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+
+      <ListBox.Item
+        id="business-consulting"
+        textValue="Business &amp; Consulting"
+      >
+        Business &amp; Consulting
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+
+      <ListBox.Item id="music-audio" textValue="Music &amp; Audio">
+        Music &amp; Audio
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+
+      <ListBox.Item id="it-cybersecurity" textValue="IT &amp; Cybersecurity">
+        IT &amp; Cybersecurity
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+
+      <ListBox.Item id="virtual-assistant" textValue="Virtual Assistant">
+        Virtual Assistant
+        <ListBox.ItemIndicator />
+      </ListBox.Item>
+
+      <ListBox.Item id="lifestyle-fitness" textValue="Lifestyle &amp; Fitness">
+        Lifestyle &amp; Fitness
         <ListBox.ItemIndicator />
       </ListBox.Item>
     </>
@@ -66,7 +118,7 @@ const PostATask = () => {
               name="category"
               placeholder="Select one"
             >
-              <Label>State</Label>
+              <Label>Category</Label>
               <Select.Trigger>
                 <Select.Value />
                 <Select.Indicator />
@@ -80,8 +132,8 @@ const PostATask = () => {
               <Input placeholder="$00.00" />
               <FieldError />
             </TextField>
-            <DateField className="max-w-96" name="date">
-              <Label>Date</Label>
+            <DateField className="max-w-96" name="deadline">
+              <Label>Deadline</Label>
               <DateField.Group>
                 <DateField.Input>
                   {(segment) => <DateField.Segment segment={segment} />}
