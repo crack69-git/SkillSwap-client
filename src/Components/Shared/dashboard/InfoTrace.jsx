@@ -1,4 +1,6 @@
 import { getTasks } from "@/lib/actions/tasks";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import React from "react";
 import { FcParallelTasks } from "react-icons/fc";
 import { MdOutlinePendingActions } from "react-icons/md";
@@ -6,8 +8,12 @@ import { RiProgress6Line } from "react-icons/ri";
 import { VscCopilotSuccess } from "react-icons/vsc";
 
 const InfoTrace = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   const res = await getTasks();
-  console.log(res);
+
   const client = (
     <>
       <div className="border p-4 rounded-2xl">
@@ -84,7 +90,11 @@ const InfoTrace = async () => {
       </div>
     </>
   );
-  return <div className="mt-10 grid grid-cols-4 gap-10">{freelancer}</div>;
+  return (
+    <div className="mt-10 grid grid-cols-4 gap-10 max-sm:grid-cols-2">
+      {session?.user?.role === "client" ? client : freelancer}
+    </div>
+  );
 };
 
 export default InfoTrace;

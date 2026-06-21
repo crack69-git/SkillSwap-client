@@ -18,7 +18,10 @@ import {
 } from "@heroui/react";
 import { createTask } from "@/lib/actions/tasks";
 import { redirect } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 const PostATask = () => {
+  const { data: session } = authClient.useSession();
+  console.log("PostATask Session:", session);
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -28,6 +31,8 @@ const PostATask = () => {
       TaskTitle: data.TaskTitle,
       category: data.category,
       budget: data.budget,
+      clientId: session?.user?._id,
+      clientName: session?.user?.name,
       createdAt: new Date().toISOString(),
       deadline: data.deadline,
       status: "Open",

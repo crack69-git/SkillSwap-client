@@ -2,23 +2,57 @@ import React from "react";
 import { Button, Drawer } from "@heroui/react";
 import { HiBars3BottomLeft } from "react-icons/hi2";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const DashboardSideBar = () => {
+const DashboardSideBar = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  console.log("DashboardSideBar Session:", session);
+  const links = <></>;
   const clientlinks = (
     <>
       <ul className="mt-4">
-        <Link href="/dashboard/client">
-          <li className="py-2 px-4 hover:bg-gray-200">Home</li>
-        </Link>
-        <Link href="/dashboard/client/post-task">
-          <li className="py-2 px-4 hover:bg-gray-200">Post a Task</li>
-        </Link>
-        <Link href="/dashboard/client/my-tasks">
-          <li className="py-2 px-4 hover:bg-gray-200">My Tasks</li>
-        </Link>
-        <Link href="/dashboard/client/manage-proposals">
-          <li className="py-2 px-4 hover:bg-gray-200">Manage Proposals</li>
-        </Link>
+        {session?.user?.role === "client" ? (
+          <div>
+            <Link href="/dashboard/client">
+              <li className="py-2 px-4 hover:bg-gray-200">Home</li>
+            </Link>
+            <Link href="/dashboard/client/post-task">
+              <li className="py-2 px-4 hover:bg-gray-200">Post a Task</li>
+            </Link>
+            <Link href="/dashboard/client/my-tasks">
+              <li className="py-2 px-4 hover:bg-gray-200">My Tasks</li>
+            </Link>
+            <Link href="/dashboard/client/manage-proposals">
+              <li className="py-2 px-4 hover:bg-gray-200">Manage Proposals</li>
+            </Link>
+          </div>
+        ) : session?.user?.role === "freelancer" ? (
+          <div>
+            <Link href="/dashboard/freelancer">
+              <li className="py-2 px-4 hover:bg-gray-200">Home</li>
+            </Link>
+            <Link href="/dashboard/freelancer/browse-tasks">
+              <li className="py-2 px-4 hover:bg-gray-200">Browse Tasks</li>
+            </Link>
+            <Link href="/dashboard/freelancer/my-proposals">
+              <li className="py-2 px-4 hover:bg-gray-200">My Proposals</li>
+            </Link>
+            <Link href="/dashboard/freelancer/active-projects">
+              <li className="py-2 px-4 hover:bg-gray-200">Active Projects </li>
+            </Link>
+            <Link href="/dashboard/freelancer/my-earnings">
+              <li className="py-2 px-4 hover:bg-gray-200">My Earnings </li>
+            </Link>
+            <Link href="/dashboard/freelancer/edit-profile">
+              <li className="py-2 px-4 hover:bg-gray-200">Edit Profile </li>
+            </Link>
+          </div>
+        ) : (
+          <div>admin</div>
+        )}
       </ul>
     </>
   );

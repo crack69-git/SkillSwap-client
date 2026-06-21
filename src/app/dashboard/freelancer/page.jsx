@@ -7,7 +7,7 @@ const FreelancerPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log("Freelancer Dashboard Session:", session);
+  // console.log("Freelancer Dashboard Session:", session);
   return (
     <div>
       <div className="w-11/12 mx-auto mt-5">
@@ -15,7 +15,7 @@ const FreelancerPage = async () => {
         <p>
           Welcome, {session?.user?.name}! This is your freelancer dashboard.
         </p>
-        {/* <InfoTrace /> */}
+        <InfoTrace />
       </div>
     </div>
   );
