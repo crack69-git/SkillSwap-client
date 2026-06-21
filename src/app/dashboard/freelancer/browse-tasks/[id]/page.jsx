@@ -1,3 +1,4 @@
+import DetailProposalForm from "@/Components/Shared/freelancer/DetailProposalForm";
 import { getSingleTask } from "@/lib/actions/freelancerProposals";
 import { Separator } from "@heroui/react";
 import React from "react";
@@ -12,11 +13,11 @@ const DetailsPage = async ({ params }) => {
   console.log("Single Task:", data);
   return (
     <div className="w-11/12 mx-auto my-5 grid grid-cols-3 gap-4">
-      <div className="col-span-2 border rounded-lg p-2">
+      <div className="col-span-2  rounded-lg p-5 shadow-lg">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-semibold">{data.TaskTitle}</h2>
           <p>
-            Budget: $<span className="font-bold text-xl">${data.budget}</span>
+            Budget: $<span className="font-bold text-xl">{data.budget}</span>
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-5">
@@ -39,7 +40,15 @@ const DetailsPage = async ({ params }) => {
         <Separator className="my-4" />
         <p className=" text-gray-500">Posted By: {data.clientName}</p>
       </div>
-      <div className="border rounded-lg p-2">form</div>
+      <div className="border rounded-lg ">
+        <div className="bg-[#0F172A] rounded-lg p-4 text-white mb-4">
+          <p className="font-bold text-xl">Submit Your Form</p>
+          <p>Fill up the form to submit the form.</p>
+        </div>
+        <div>
+          <DetailProposalForm id={id} />
+        </div>
+      </div>
     </div>
   );
 };
