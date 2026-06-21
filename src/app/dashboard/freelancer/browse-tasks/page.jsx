@@ -9,9 +9,13 @@ const BrowseTasks = async () => {
     <div className="my-5 w-11/12 mx-auto">
       <h2 className="text-4xl font-bold mb-10">Browse Tasks</h2>
       <div className="flex flex-col gap-5">
-        {data.map((task) => (
-          <OpenTask key={task._id} task={task} />
-        ))}
+        {data.length > 0 ? (
+          data.map((task) => <OpenTask key={task._id} task={task} />)
+        ) : (
+          <div className="text-gray-500 text-lg">
+            No open tasks available at the moment.
+          </div>
+        )}
       </div>
     </div>
   );

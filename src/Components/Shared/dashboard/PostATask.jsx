@@ -36,6 +36,7 @@ const PostATask = () => {
       createdAt: new Date().toISOString(),
       deadline: data.deadline,
       status: "Open",
+      state: "pending",
       description: data.description,
     };
 

@@ -51,7 +51,22 @@ const DashboardSideBar = async () => {
             </Link>
           </div>
         ) : (
-          <div>admin</div>
+          <div>
+            <Link href="/dashboard/admin">
+              <li className="py-2 px-4 hover:bg-gray-200">Home </li>
+            </Link>
+            <Link href="/dashboard/admin/manage-users">
+              <li className="py-2 px-4 hover:bg-gray-200">Manage Users </li>
+            </Link>
+            <Link href="/dashboard/admin/manage-tasks">
+              <li className="py-2 px-4 hover:bg-gray-200">Manage Tasks </li>
+            </Link>
+            <Link href="/dashboard/admin/transaction-history">
+              <li className="py-2 px-4 hover:bg-gray-200">
+                Transaction History{" "}
+              </li>
+            </Link>
+          </div>
         )}
       </ul>
     </>
