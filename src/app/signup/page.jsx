@@ -29,6 +29,7 @@ const RegisterPage = () => {
       password: data.password, // required
       image: data.imageLink,
       role: data.role,
+      userState: "unblocked",
       callbackURL: "/",
     });
     if (res) {

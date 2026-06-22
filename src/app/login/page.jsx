@@ -26,10 +26,14 @@ const page = () => {
       rememberMe: true,
       // callbackURL: "/",
     });
-    console.log("Login response:", res, error);
+    console.log("Login response:", res.user);
     if (res) {
-      alert("Login successful");
-      redirect("/");
+      if (res.user.userState === "blocked") {
+        alert("Your account is blocked. Please contact support.");
+        return;
+      }
+      alert("Login successful!");
+      router.push("/");
     } else {
       alert("Login failed! please try again.");
     }
