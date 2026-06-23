@@ -8,9 +8,13 @@ const MyProposalPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log("session", session);
-  const res = await getProposals(session?.user?.email);
-  console.log("my proposals", res);
+
+  const email = session?.user?.email;
+  console.log("User Email:", email);
+
+  const res = await getProposals(email);
+  console.log("My Proposals:", res);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h1 className="text-3xl font-bold mb-5">My Proposals</h1>

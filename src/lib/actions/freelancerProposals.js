@@ -35,7 +35,7 @@ export const getFreelancerProposals = async (freelancerId) => {
 
 export const getProposals = async (mail) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${encodeURIComponent(mail)}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/getprop/${encodeURIComponent(mail)}`,
     {
       method: "GET",
     },
