@@ -18,3 +18,28 @@ export const getTasks = async () => {
   });
   return res.json();
 };
+
+export const getAllProposalById = async (id) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${id}`,
+    {
+      cache: "no-store",
+      method: "GET",
+    },
+  );
+  return res.json();
+};
+
+export const patchProposal = async (proposalId, status) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${proposalId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(status),
+    },
+  );
+  return res.json();
+};

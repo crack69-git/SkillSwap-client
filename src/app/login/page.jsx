@@ -26,9 +26,9 @@ const page = () => {
       rememberMe: true,
       // callbackURL: "/",
     });
-    console.log("Login response:", res.user);
+    // console.log("Login response:", res.user);
     if (res) {
-      if (res.user.userState === "blocked") {
+      if (res?.user?.userState === "blocked") {
         alert("Your account is blocked. Please contact support.");
         return;
       }

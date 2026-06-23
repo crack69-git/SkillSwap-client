@@ -31,7 +31,7 @@ const PostATask = () => {
       TaskTitle: data.TaskTitle,
       category: data.category,
       budget: data.budget,
-      clientId: session?.user?._id,
+      clientId: session?.user?.id,
       clientName: session?.user?.name,
       createdAt: new Date().toISOString(),
       deadline: data.deadline,

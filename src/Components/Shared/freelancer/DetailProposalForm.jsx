@@ -32,6 +32,7 @@ const DetailProposalForm = ({ data: current }) => {
     const toady = new Date();
 
     const proposalData = {
+      clientId: current.clientId,
       bid: data.bid,
       date: data.date,
       currentDate: toady,
