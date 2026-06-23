@@ -46,7 +46,7 @@ const DetailsPage = async ({ params }) => {
           <p>Fill up the form to submit the form.</p>
         </div>
         <div>
-          <DetailProposalForm id={id} />
+          <DetailProposalForm data={data} />
         </div>
       </div>
     </div>

@@ -90,9 +90,51 @@ const InfoTrace = async () => {
       </div>
     </>
   );
+  const admin = (
+    <>
+      <div className="border p-4 rounded-2xl">
+        <p className="flex items-center gap-2 text-xl font-bold">
+          <FcParallelTasks />
+          Total Proposals
+        </p>
+        <p className="text-3xl font-bold">{res.length}</p>
+      </div>
+      <div className="border p-4 rounded-2xl">
+        <p className="flex items-center gap-2 text-xl font-bold">
+          <MdOutlinePendingActions />
+          Pending Proposals
+        </p>
+        <p className="text-3xl font-bold">
+          {res.filter((task) => task.status === "Open").length}
+        </p>
+      </div>
+      <div className="border p-4 rounded-2xl">
+        <p className="flex items-center gap-2 text-xl font-bold">
+          <VscCopilotSuccess />
+          Accepted Proposals
+        </p>
+        <p className="text-3xl font-bold">
+          {res.filter((task) => task.status === "Completed").length}
+        </p>
+      </div>
+      <div className="border p-4 rounded-2xl">
+        <p className="flex items-center gap-2 text-xl font-bold">
+          <RiProgress6Line />
+          Total Earnings
+        </p>
+        <p className="text-3xl font-bold">
+          {res.filter((task) => task.status === "In Progress").length}
+        </p>
+      </div>
+    </>
+  );
   return (
     <div className="mt-10 grid grid-cols-4 gap-10 max-sm:grid-cols-2">
-      {session?.user?.role === "client" ? client : freelancer}
+      {session?.user?.role === "client"
+        ? client
+        : session?.user?.role === "freelancer"
+          ? freelancer
+          : admin}
     </div>
   );
 };

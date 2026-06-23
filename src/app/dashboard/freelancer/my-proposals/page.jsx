@@ -1,0 +1,39 @@
+import { getProposals } from "@/lib/actions/freelancerProposals";
+import { auth } from "@/lib/auth";
+import { Table } from "@heroui/react";
+import { headers } from "next/headers";
+import React from "react";
+import MyProposalTable from "@/Components/Shared/admin/MyProposalTable";
+const MyProposalPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  console.log("session", session);
+  const res = await getProposals(session?.user?.email);
+  console.log("my proposals", res);
+  return (
+    <div className="w-11/12 mx-auto my-5">
+      <h1 className="text-3xl font-bold mb-5">My Proposals</h1>
+      <Table variant="secondary">
+        <Table.ScrollContainer>
+          <Table.Content aria-label="Team members" className="min-w-[600px]">
+            <Table.Header>
+              <Table.Column isRowHeader>Task Title</Table.Column>
+              <Table.Column>Budget Bid</Table.Column>
+              <Table.Column>Estimate Date</Table.Column>
+              <Table.Column>Status</Table.Column>
+              <Table.Column>Proposal Sent</Table.Column>
+            </Table.Header>
+            <Table.Body>
+              {res.map((proposal) => (
+                <MyProposalTable key={proposal._id} proposal={proposal} />
+              ))}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
+      </Table>
+    </div>
+  );
+};
+
+export default MyProposalPage;

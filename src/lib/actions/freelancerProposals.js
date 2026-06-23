@@ -32,3 +32,13 @@ export const getFreelancerProposals = async (freelancerId) => {
   );
   return res.json();
 };
+
+export const getProposals = async (mail) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${encodeURIComponent(mail)}`,
+    {
+      method: "GET",
+    },
+  );
+  return res.json();
+};

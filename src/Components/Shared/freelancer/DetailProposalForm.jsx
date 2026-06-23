@@ -1,6 +1,7 @@
 "use client";
 import {
   getFreelancerProposals,
+  getSingleTask,
   submitProposal,
 } from "@/lib/actions/freelancerProposals";
 import { authClient } from "@/lib/auth-client";
@@ -19,27 +20,32 @@ import {
   DateField,
 } from "@heroui/react";
 
-const DetailProposalForm = ({ id }) => {
+const DetailProposalForm = ({ data: current }) => {
   const { data: session } = authClient.useSession();
+  console.log("Data", current);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log("Form Data:", data);
+    const toady = new Date();
+
     const proposalData = {
       bid: data.bid,
       date: data.date,
+      currentDate: toady,
       note: data.note,
-      freelancerId: session?.user?.id,
-      taskId: id,
       freelancerName: session?.user?.name,
+      taskId: current._id,
+      taskTitle: current.TaskTitle,
+      freelancerMail: session?.user?.email,
       status: "pending",
     };
+    console.log("Form Data:", proposalData);
     const getproposal = await getFreelancerProposals(session?.user?.id);
     const existingProposal = getproposal.find(
-      (proposal) => proposal.taskId === id,
+      (proposal) => proposal.taskId === current._id,
     );
     if (existingProposal) {
       alert("You have already submitted a proposal for this task.");
