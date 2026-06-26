@@ -16,8 +16,12 @@ const NavbarUser = () => {
           <Link href="/">
             <p className="text-2xl font-bold text-blue-600">SkillSwap</p>
           </Link>
-          <p>Browse Tasks</p>
-          <p>Browse Freelancers</p>
+          <Link href="/browse-tasks">
+            <p className="">Browse Tasks</p>
+          </Link>
+          <Link href="/browse-freelancers">
+            <p className="">Browse Freelancers</p>
+          </Link>
         </div>
 
         {data?.user ? (
