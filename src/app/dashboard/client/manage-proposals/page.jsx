@@ -8,7 +8,11 @@ import React from "react";
 const ManageProposals = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
   console.log("Session Data:", session);
-  const data = await getAllProposalById(session?.user?.id);
+  const userId = session?.user?.id;
+  console.log(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/freelancer/proposals/${userId}`,
+  );
+  const data = await getAllProposalById(userId);
   console.log("Proposals Data:", data);
   return (
     <div className="w-11/12 mx-auto my-5">

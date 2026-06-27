@@ -8,6 +8,24 @@ const ManageProposalsClient = ({ proposal }) => {
     const res = await patchProposal(proposalId, { status: "rejected" });
     console.log("Proposal rejected:", res);
   };
+  const handleCheckout = async (proposalId) => {
+    // // Implementation for handling checkout
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/create-checkout-session`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          proposalId,
+        }),
+      },
+    );
+    const data = await res.json();
+    console.log("data", data);
+    window.location.href = data.url;
+  };
 
   return (
     <Table.Row>
@@ -20,8 +38,8 @@ const ManageProposalsClient = ({ proposal }) => {
         {proposal.status === "rejected" ? (
           <p>{proposal.status}</p>
         ) : (
-          <div className="flex flex-col gap-2">
-            <Button>Accept</Button>
+          <div className="flex flex-col justify-center items-center gap-2">
+            <Button onClick={() => handleCheckout(proposal._id)}>Accept</Button>
             <Button onClick={() => handleReject(proposal._id, proposal.status)}>
               Reject
             </Button>

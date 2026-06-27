@@ -21,12 +21,12 @@ export const getTasks = async () => {
 
 export const getAllProposalById = async (id) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/client/${id}`,
     {
-      cache: "no-store",
       method: "GET",
     },
   );
+  console.log("Fetched Proposals:", res);
   return res.json();
 };
 
@@ -39,6 +39,17 @@ export const patchProposal = async (proposalId, status) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(status),
+    },
+  );
+  return res.json();
+};
+
+export const getFreelancer = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/freelancer`,
+    {
+      cache: "no-store",
+      method: "GET",
     },
   );
   return res.json();

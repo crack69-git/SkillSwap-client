@@ -19,7 +19,7 @@ const NavbarUser = () => {
           <Link href="/browse-tasks">
             <p className="">Browse Tasks</p>
           </Link>
-          <Link href="/browse-freelancers">
+          <Link href="/browse-freelancer">
             <p className="">Browse Freelancers</p>
           </Link>
         </div>
