@@ -24,3 +24,15 @@ export const patchTaskStatus = async (taskId, statusData) => {
   );
   return res.json();
 };
+
+export const getAccepterProposals = async (freelancerEmail) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/freelancer/${encodeURIComponent(
+      freelancerEmail,
+    )}`,
+    {
+      method: "GET",
+    },
+  );
+  return res.json();
+};
