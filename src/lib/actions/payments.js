@@ -36,3 +36,13 @@ export const getAccepterProposals = async (freelancerEmail) => {
   );
   return res.json();
 };
+
+export const getFreelancerPayments = async (freelancerEmail) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/payments/sum/${encodeURIComponent(freelancerEmail)}`,
+    {
+      method: "GET",
+    },
+  );
+  return res.json();
+};
