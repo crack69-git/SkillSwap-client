@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { stripe } from "../../lib/stripe";
-import { createPayment } from "@/lib/actions/payments";
+import { createPayment, patchTaskStatus } from "@/lib/actions/payments";
 import { patchProposal } from "@/lib/actions/tasks";
 
 export default async function Success({ searchParams }) {
@@ -39,6 +39,10 @@ export default async function Success({ searchParams }) {
       console.log("Payment created successfully:", paymentResponse);
       const res = await patchProposal(session.metadata.proposalId, {
         status: "accepted",
+      });
+
+      const taskRes = await patchTaskStatus(metadata.taskId, {
+        status: "in-progress",
       });
     }
 

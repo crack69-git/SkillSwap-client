@@ -1,4 +1,4 @@
-import InfoTrace from "@/Components/Shared/dashboard/InfoTrace";
+// import InfoTrace from "@/Components/Shared/dashboard/InfoTrace";
 import React from "react";
 
 const AdminPage = () => {
@@ -9,9 +9,7 @@ const AdminPage = () => {
         Welcome to the admin dashboard! Here you can manage users, tasks, and
         view transaction history.
       </p>
-      <div className="mt-5">
-        <InfoTrace />
-      </div>
+      <div className="mt-5">{/* <InfoTrace /> */}</div>
     </div>
   );
 };
