@@ -11,6 +11,7 @@ const InfoTrace = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  const userId = session?.user?.id;
 
   const res = await getTasks();
 

@@ -13,7 +13,6 @@ export const createTask = async (data) => {
 
 export const getTasks = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
-    cache: "no-store",
     method: "GET",
   });
   return res.json();

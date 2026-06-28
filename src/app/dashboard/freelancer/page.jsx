@@ -1,4 +1,4 @@
-import InfoTrace from "@/Components/Shared/dashboard/InfoTrace";
+// import InfoTrace from "@/Components/Shared/dashboard/InfoTrace";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import React from "react";
@@ -15,7 +15,7 @@ const FreelancerPage = async () => {
         <p>
           Welcome, {session?.user?.name}! This is your freelancer dashboard.
         </p>
-        <InfoTrace />
+        {/* <InfoTrace /> */}
       </div>
     </div>
   );
