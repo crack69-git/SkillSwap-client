@@ -226,6 +226,7 @@ const EditProfileSection = ({ user }) => {
       </ListBox.Item>
     </>
   );
+
   return (
     <div>
       <Form className="w-full max-w-96" onSubmit={onSubmit}>

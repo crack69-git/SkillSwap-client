@@ -20,7 +20,8 @@ const page = async () => {
         <div>
           <h1 className="text-3xl font-bold">Available Tasks</h1>
           <p>
-            Explore <span className="font-bold">140</span> available tasks
+            Explore <span className="font-bold">{data.length}</span> available
+            tasks
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
             {data.map((task) => (
