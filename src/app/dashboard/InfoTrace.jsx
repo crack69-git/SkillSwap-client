@@ -1,3 +1,7 @@
+import {
+  getProposals,
+  getSumOfPayments,
+} from "@/lib/actions/freelancerProposals";
 import { getTasks } from "@/lib/actions/tasks";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -14,17 +18,21 @@ const InfoTrace = async () => {
   const userId = session?.user?.id;
 
   const res = await getTasks();
+  const userProposals = await getProposals(session?.user?.email);
+  console.log("User Proposals:", userProposals);
+  const Earning = await getSumOfPayments(session?.user?.email);
+  console.log("Total Earnings:", Earning);
 
   const client = (
     <>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <FcParallelTasks />
           Total Tasks
         </p>
         <p className="text-3xl font-bold">{res.length}</p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <MdOutlinePendingActions />
           Pending Tasks
@@ -33,7 +41,7 @@ const InfoTrace = async () => {
           {res.filter((task) => task.status === "Open").length}
         </p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <VscCopilotSuccess />
           Completed Tasks
@@ -42,65 +50,63 @@ const InfoTrace = async () => {
           {res.filter((task) => task.status === "Completed").length}
         </p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <RiProgress6Line />
           In Progress
         </p>
         <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "In Progress").length}
+          {res.filter((task) => task.status === "in-progress").length}
         </p>
       </div>
     </>
   );
   const freelancer = (
     <>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <FcParallelTasks />
           Total Proposals
         </p>
-        <p className="text-3xl font-bold">{res.length}</p>
+        <p className="text-2xl text-center">{userProposals.length}</p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <MdOutlinePendingActions />
           Pending Proposals
         </p>
-        <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "Open").length}
+        <p className="text-2xl text-center">
+          {userProposals.filter((task) => task.status === "accepted").length}
         </p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <VscCopilotSuccess />
           Accepted Proposals
         </p>
-        <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "Completed").length}
+        <p className="text-2xl text-center">
+          {userProposals.filter((task) => task.status === "completed").length}
         </p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <RiProgress6Line />
           Total Earnings
         </p>
-        <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "In Progress").length}
-        </p>
+        <p className="text-2xl text-center">${Earning?.total ?? 0}</p>
       </div>
     </>
   );
   const admin = (
     <>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <FcParallelTasks />
           Total Proposals
         </p>
         <p className="text-3xl font-bold">{res.length}</p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <MdOutlinePendingActions />
           Pending Proposals
@@ -109,7 +115,7 @@ const InfoTrace = async () => {
           {res.filter((task) => task.status === "Open").length}
         </p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <VscCopilotSuccess />
           Accepted Proposals
@@ -118,7 +124,7 @@ const InfoTrace = async () => {
           {res.filter((task) => task.status === "Completed").length}
         </p>
       </div>
-      <div className="border p-4 rounded-2xl">
+      <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <RiProgress6Line />
           Total Earnings

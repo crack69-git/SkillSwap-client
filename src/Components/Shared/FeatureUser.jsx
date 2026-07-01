@@ -6,7 +6,7 @@ import OpenTask from "./freelancer/OpenTask";
 
 const FeatureUser = async () => {
   const data = await getOpenTasks();
-  console.log(data);
+  // console.log(data);
   return (
     <div className="my-10 w-11/12 mx-auto">
       <h3 className="text-4xl font-bold ">Latest Feature Tasks</h3>
