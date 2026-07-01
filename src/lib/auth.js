@@ -20,10 +20,24 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
+        type: "string",
         default: "client",
       },
       userState: {
+        type: "string",
         default: "unblocked",
+      },
+      bio: {
+        type: "string",
+        default: "no data",
+      },
+      hourlyRate: {
+        type: "number",
+        default: 0,
+      },
+      skills: {
+        type: "string[]",
+        default: ["no skills"],
       },
     },
   },

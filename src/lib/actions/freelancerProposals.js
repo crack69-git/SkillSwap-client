@@ -33,9 +33,33 @@ export const getFreelancerProposals = async (freelancerId) => {
   return res.json();
 };
 
-export const getProposals = async (mail) => {
+export const getProposals = async (freelancerId) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/getprop/${encodeURIComponent(mail)}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/getprop/${encodeURIComponent(freelancerId)}`,
+    {
+      method: "GET",
+    },
+  );
+  return res.json();
+};
+
+export const freelancerPatch = async (freelancerId, updatedData) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/${freelancerId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    },
+  );
+  return res.json();
+};
+
+export const getFreelancerProfile = async (freelancerId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/freelancer/${freelancerId}`,
     {
       method: "GET",
     },

@@ -29,6 +29,9 @@ const RegisterPage = () => {
       password: data.password, // required
       image: data.imageLink,
       role: data.role,
+      bio: "",
+      hourlyRate: 0,
+      skills: [""],
       userState: "unblocked",
       callbackURL: "/",
     });
