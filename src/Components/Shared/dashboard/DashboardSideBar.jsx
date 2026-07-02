@@ -31,8 +31,11 @@ const DashboardSideBar = async () => {
           </div>
         ) : session?.user?.role === "freelancer" ? (
           <div>
-            <Link href="/dashboard/freelancer">
-              <li className="py-2 px-4 hover:bg-gray-200">Home</li>
+            <Link
+              href="/dashboard/freelancer"
+              className="py-2 px-4 hover:bg-gray-200"
+            >
+              <li>Home</li>
             </Link>
             <Link href="/dashboard/freelancer/browse-tasks">
               <li className="py-2 px-4 hover:bg-gray-200">Browse Tasks</li>
@@ -77,8 +80,8 @@ const DashboardSideBar = async () => {
         <h2 className="text-lg font-bold">Dashboard</h2>
         {clientlinks}
       </aside>
-      <Drawer className="">
-        <Button variant="secondary" className="rounded-lg">
+      <Drawer className=" ">
+        <Button variant="secondary" className="rounded-lg ">
           <HiBars3BottomLeft />
         </Button>
         <Drawer.Backdrop>
@@ -90,12 +93,6 @@ const DashboardSideBar = async () => {
                 <Drawer.Heading>Dashboard</Drawer.Heading>
               </Drawer.Header>
               <Drawer.Body>{clientlinks}</Drawer.Body>
-              <Drawer.Footer>
-                <Button slot="close" variant="secondary">
-                  Cancel
-                </Button>
-                <Button slot="close">Done</Button>
-              </Drawer.Footer>
             </Drawer.Dialog>
           </Drawer.Content>
         </Drawer.Backdrop>

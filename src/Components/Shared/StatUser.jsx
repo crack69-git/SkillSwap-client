@@ -3,7 +3,7 @@ import React from "react";
 const StatUser = () => {
   return (
     <div className="bg-[#0F172A] text-white  ">
-      <div className="w-11/12 mx-auto py-10 flex items-center justify-between gap-10">
+      <div className="w-11/12 mx-auto py-10 grid max-sm:grid-cols-2 grid-cols-4  gap-10">
         <div>
           <p className="text-3xl font-bold text-[#10B981]">240k+</p>
           <p>Active Tasks</p>

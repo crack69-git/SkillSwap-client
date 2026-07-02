@@ -46,3 +46,13 @@ export const getFreelancerPayments = async (freelancerEmail) => {
   );
   return res.json();
 };
+
+export const getAllPayments = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/payments/all`,
+    {
+      method: "GET",
+    },
+  );
+  return res.json();
+};
