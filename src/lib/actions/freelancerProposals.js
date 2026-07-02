@@ -1,8 +1,17 @@
 "use server";
-export const getOpenTasks = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/open`, {
-    method: "GET",
-  });
+export const getOpenTasks = async (name = "", skill = "") => {
+  const params = new URLSearchParams();
+
+  if (name) params.append("name", name);
+  if (skill) params.append("skill", skill);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/open?${params.toString()}`,
+    {
+      cache: "no-store",
+      method: "GET",
+    },
+  );
   return res.json();
 };
 export const getSingleTask = async (id) => {
