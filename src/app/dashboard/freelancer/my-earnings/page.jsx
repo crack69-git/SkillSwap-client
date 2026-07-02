@@ -19,12 +19,11 @@ const page = async () => {
         <Table.ScrollContainer>
           <Table.Content aria-label="Team members" className="">
             <Table.Header>
-              <Table.Column isRowHeader>Payment ID</Table.Column>
-              <Table.Column>Task ID</Table.Column>
-              <Table.Column>Currency</Table.Column>
+              <Table.Column isRowHeader>Task Title</Table.Column>
+              <Table.Column>Client Name</Table.Column>
+              <Table.Column>Amount Made</Table.Column>
 
-              <Table.Column>Earning</Table.Column>
-              <Table.Column>Status</Table.Column>
+              <Table.Column>Completion Date</Table.Column>
             </Table.Header>
             <Table.Body>
               {data.payments.map((payment) => (

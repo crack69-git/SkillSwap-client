@@ -9,9 +9,7 @@ const ManageProposals = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
   console.log("Session Data:", session);
   const userId = session?.user?.id;
-  console.log(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/freelancer/proposals/${userId}`,
-  );
+
   const data = await getAllProposalById(userId);
   console.log("Proposals Data:", data);
   return (

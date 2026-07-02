@@ -61,7 +61,7 @@ const DashboardSideBar = async () => {
             <Link href="/dashboard/admin/manage-tasks">
               <li className="py-2 px-4 hover:bg-gray-200">Manage Tasks </li>
             </Link>
-            <Link href="/dashboard/admin/transaction-history">
+            <Link href="/dashboard/admin/transections-history">
               <li className="py-2 px-4 hover:bg-gray-200">
                 Transaction History{" "}
               </li>

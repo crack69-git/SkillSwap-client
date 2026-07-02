@@ -53,3 +53,13 @@ export const deleteTask = async (taskId) => {
   const result = await res.json();
   return result;
 };
+
+const totalRevenue = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/payments/sum`,
+    {
+      method: "GET",
+    },
+  );
+  return res.json();
+};

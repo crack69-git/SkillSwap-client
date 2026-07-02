@@ -1,3 +1,4 @@
+import { getAllUsers } from "@/lib/actions/admin";
 import {
   getProposals,
   getSumOfPayments,
@@ -16,7 +17,7 @@ const InfoTrace = async () => {
     headers: await headers(),
   });
   const userId = session?.user?.id;
-
+  const users = await getAllUsers();
   const res = await getTasks();
   const userProposals = await getProposals(session?.user?.email);
   console.log("User Proposals:", userProposals);
@@ -102,23 +103,21 @@ const InfoTrace = async () => {
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <FcParallelTasks />
-          Total Proposals
+          Total Users
         </p>
-        <p className="text-3xl font-bold">{res.length}</p>
+        <p className="text-2xl font-bold text-center">{users.length - 1}</p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <MdOutlinePendingActions />
-          Pending Proposals
+          Total Tasks
         </p>
-        <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "Open").length}
-        </p>
+        <p className="text-2xl font-bold text-center">{res.length}</p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <VscCopilotSuccess />
-          Accepted Proposals
+          Total Revenue(USD)
         </p>
         <p className="text-3xl font-bold">
           {res.filter((task) => task.status === "Completed").length}
@@ -127,10 +126,10 @@ const InfoTrace = async () => {
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <RiProgress6Line />
-          Total Earnings
+          Active Tasks
         </p>
         <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "In Progress").length}
+          {res.filter((task) => task.status === "in-progress").length}
         </p>
       </div>
     </>

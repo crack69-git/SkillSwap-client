@@ -16,6 +16,7 @@ export default async function Success({ searchParams }) {
 
   const { status, metadata, customer_details } = session;
   const customerEmail = customer_details?.email;
+  console.log("metadata", metadata);
 
   if (status === "open") {
     return redirect("/");
@@ -27,10 +28,14 @@ export default async function Success({ searchParams }) {
       amount_received: session.payment_intent.amount_received / 100,
       currency: session.payment_intent.currency,
       status: session.payment_intent.status,
+      clientEmail: customerEmail,
       clientId: metadata.clientId,
       freelancerMail: metadata.freelancerMail,
       taskId: metadata.taskId,
+      taskTitle: metadata.taskTitle,
       proposalId: metadata.proposalId,
+      paymentDate: new Date(),
+      deadline: metadata.deadline,
     };
 
     const paymentResponse = await createPayment(paymentNow);
