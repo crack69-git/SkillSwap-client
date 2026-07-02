@@ -15,7 +15,7 @@ const page = async () => {
   const data = await getOpenTasks();
   console.log(data);
   return (
-    <div className="w-11/12 mx-auto my-5">
+    <div className="w-11/12 mx-auto my-5 min-h-screen">
       {Role === "freelancer" || Role === "admin" ? (
         <div>
           <h1 className="text-3xl font-bold">Available Tasks</h1>

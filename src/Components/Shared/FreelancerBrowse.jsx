@@ -6,7 +6,7 @@ const FreelancerBrowse = ({ data }) => {
   return (
     <div>
       {" "}
-      <Card className="w-full border" variant="default">
+      <Card className="w-full h-full border" variant="default">
         <Card.Header>
           <Card.Title className="text-lg font-bold">{data.name}</Card.Title>
           <Card.Title>{data.email}</Card.Title>
@@ -22,7 +22,7 @@ const FreelancerBrowse = ({ data }) => {
                 {data.skills.map((skill, index) => (
                   <li
                     key={index}
-                    className="flex flex-wrap items-center text-sm bg-sky-100 px-6 w-fit rounded-3xl my-3"
+                    className="flex flex-wrap items-center text-sm bg-sky-100 dark:bg-sky-500 px-6 w-fit rounded-3xl my-3"
                   >
                     {skill}
                   </li>

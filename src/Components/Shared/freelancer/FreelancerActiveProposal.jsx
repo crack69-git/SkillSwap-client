@@ -6,12 +6,12 @@ const FreelancerActiveProposal = async ({ proposal }) => {
   return (
     <div>
       <Card
-        className="border bg-gray-50 shadow-lg rounded-lg p-4"
+        className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4"
         variant="default"
       >
         <Card.Header>
           <Card.Title
-            className={`font-semibold w-fit mb-3 px-5 rounded-3xl ${proposal.status === "Open" ? "bg-purple-200" : proposal.status === "In Progress" ? "bg-yellow-200" : "bg-green-200"}`}
+            className={`font-semibold w-fit mb-3 px-5 rounded-3xl ${proposal.status === "Open" ? "bg-purple-200 dark:bg-purple-500" : proposal.status === "In Progress" ? "bg-yellow-200 dark:bg-yellow-500" : "bg-green-200 dark:bg-green-500"}`}
           >
             {proposal.status}
           </Card.Title>

@@ -32,7 +32,7 @@ const Ready = () => {
         </div>
       </div>
       <div>
-        <div className=" flex  items-center gap-5 max-sm:hidden">
+        <div className=" flex  items-center gap-5 max-[827px]:hidden">
           <p className="relative -top-5 flex flex-col items-center gap-2 text-2xl font-medium bg-[#ad8cf3] rounded-2xl p-8">
             <IoShieldCheckmark className="text-green-300 text-6xl" />
             Secure

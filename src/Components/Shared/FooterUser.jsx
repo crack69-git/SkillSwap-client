@@ -5,12 +5,12 @@ import { GrLinkedin } from "react-icons/gr";
 
 const FooterUser = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 dark:bg-gray-900">
       <div className="w-11/12 mx-auto">
         <div className="flex max-sm:flex-col max-sm:items-center max-sm:justify-center items-end justify-between py-10">
           <div className="max-sm:mb-5">
             <p className="text-2xl font-bold">SkillSwap</p>
-            <p className="w-11/12 text-gray-700 mt-2">
+            <p className="w-11/12 text-gray-700 dark:text-gray-300 mt-2">
               The premium choice for professional freelancers and high-growth
               companies.
             </p>

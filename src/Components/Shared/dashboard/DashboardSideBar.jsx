@@ -17,52 +17,78 @@ const DashboardSideBar = async () => {
         {session?.user?.role === "client" ? (
           <ul>
             <Link href="/dashboard/client">
-              <li className="py-2 px-4 hover:bg-gray-200">Home</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Home
+              </li>
             </Link>
             <Link href="/dashboard/client/post-task">
-              <li className="py-2 px-4 hover:bg-gray-200">Post a Task</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Post a Task
+              </li>
             </Link>
             <Link href="/dashboard/client/my-tasks">
-              <li className="py-2 px-4 hover:bg-gray-200">My Tasks</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                My Tasks
+              </li>
             </Link>
             <Link href="/dashboard/client/manage-proposals">
-              <li className="py-2 px-4 hover:bg-gray-200">Manage Proposals</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Manage Proposals
+              </li>
             </Link>
           </ul>
         ) : session?.user?.role === "freelancer" ? (
           <ul>
             <Link href="/dashboard/freelancer">
-              <li className="py-2 px-4 hover:bg-gray-200">Home</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Home
+              </li>
             </Link>
             <Link href="/dashboard/freelancer/browse-tasks">
-              <li className="py-2 px-4 hover:bg-gray-200">Browse Tasks</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Browse Tasks
+              </li>
             </Link>
             <Link href="/dashboard/freelancer/my-proposals">
-              <li className="py-2 px-4 hover:bg-gray-200">My Proposals</li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                My Proposals
+              </li>
             </Link>
             <Link href="/dashboard/freelancer/active-projects">
-              <li className="py-2 px-4 hover:bg-gray-200">Active Projects </li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Active Projects
+              </li>
             </Link>
             <Link href="/dashboard/freelancer/my-earnings">
-              <li className="py-2 px-4 hover:bg-gray-200">My Earnings </li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                My Earnings
+              </li>
             </Link>
             <Link href="/dashboard/freelancer/edit-profile">
-              <li className="py-2 px-4 hover:bg-gray-200">Edit Profile </li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Edit Profile
+              </li>
             </Link>
           </ul>
         ) : (
           <ul>
             <Link href="/dashboard/admin">
-              <li className="py-2 px-4 hover:bg-gray-200">Home </li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Home{" "}
+              </li>
             </Link>
             <Link href="/dashboard/admin/manage-users">
-              <li className="py-2 px-4 hover:bg-gray-200">Manage Users </li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Manage Users{" "}
+              </li>
             </Link>
             <Link href="/dashboard/admin/manage-tasks">
-              <li className="py-2 px-4 hover:bg-gray-200">Manage Tasks </li>
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
+                Manage Tasks{" "}
+              </li>
             </Link>
             <Link href="/dashboard/admin/transections-history">
-              <li className="py-2 px-4 hover:bg-gray-200">
+              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
                 Transaction History{" "}
               </li>
             </Link>
@@ -73,7 +99,7 @@ const DashboardSideBar = async () => {
   );
   return (
     <div>
-      <aside className="hidden lg:block w-64 h-full bg-gray-100 p-4">
+      <aside className="hidden lg:block w-64 h-full bg-gray-100 dark:bg-gray-900 p-4">
         <h2 className="text-lg font-bold">Dashboard</h2>
         {clientlinks}
       </aside>

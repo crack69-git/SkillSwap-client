@@ -9,6 +9,7 @@ import { Button, Drawer, Separator } from "@heroui/react";
 import ToogleTheme from "./dashboard/ToogleTheme";
 import { IoMenu } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
+import { redirect } from "next/navigation";
 
 const NavbarUser = () => {
   const { data } = authClient.useSession();
@@ -82,7 +83,18 @@ const NavbarUser = () => {
 
               <p>Welcome, {data.user.name}</p>
 
-              <Button color="danger" onPress={() => authClient.signOut()}>
+              <Button
+                color="danger"
+                onPress={() =>
+                  authClient.signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        window.location.href = "/login";
+                      },
+                    },
+                  })
+                }
+              >
                 <FiLogOut />
                 Logout
               </Button>
