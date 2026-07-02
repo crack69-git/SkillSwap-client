@@ -13,9 +13,9 @@ const DashboardSideBar = async () => {
   const links = <></>;
   const clientlinks = (
     <>
-      <ul className="mt-4">
+      <div className="mt-4">
         {session?.user?.role === "client" ? (
-          <div>
+          <ul>
             <Link href="/dashboard/client">
               <li className="py-2 px-4 hover:bg-gray-200">Home</li>
             </Link>
@@ -28,14 +28,11 @@ const DashboardSideBar = async () => {
             <Link href="/dashboard/client/manage-proposals">
               <li className="py-2 px-4 hover:bg-gray-200">Manage Proposals</li>
             </Link>
-          </div>
+          </ul>
         ) : session?.user?.role === "freelancer" ? (
-          <div>
-            <Link
-              href="/dashboard/freelancer"
-              className="py-2 px-4 hover:bg-gray-200"
-            >
-              <li>Home</li>
+          <ul>
+            <Link href="/dashboard/freelancer">
+              <li className="py-2 px-4 hover:bg-gray-200">Home</li>
             </Link>
             <Link href="/dashboard/freelancer/browse-tasks">
               <li className="py-2 px-4 hover:bg-gray-200">Browse Tasks</li>
@@ -52,9 +49,9 @@ const DashboardSideBar = async () => {
             <Link href="/dashboard/freelancer/edit-profile">
               <li className="py-2 px-4 hover:bg-gray-200">Edit Profile </li>
             </Link>
-          </div>
+          </ul>
         ) : (
-          <div>
+          <ul>
             <Link href="/dashboard/admin">
               <li className="py-2 px-4 hover:bg-gray-200">Home </li>
             </Link>
@@ -69,9 +66,9 @@ const DashboardSideBar = async () => {
                 Transaction History{" "}
               </li>
             </Link>
-          </div>
+          </ul>
         )}
-      </ul>
+      </div>
     </>
   );
   return (

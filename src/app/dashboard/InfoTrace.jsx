@@ -117,7 +117,7 @@ const InfoTrace = async () => {
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
           <VscCopilotSuccess />
-          Total Revenue(USD)
+          Total Revenue
         </p>
         <p className="text-3xl font-bold">
           {res.filter((task) => task.status === "Completed").length}
@@ -135,7 +135,7 @@ const InfoTrace = async () => {
     </>
   );
   return (
-    <div className="mt-10 grid grid-cols-4 gap-10 max-sm:grid-cols-2">
+    <div className="mt-10 grid grid-cols-4 gap-10 max-sm:grid-cols-1 max-md:grid-cols-2">
       {session?.user?.role === "client"
         ? client
         : session?.user?.role === "freelancer"
