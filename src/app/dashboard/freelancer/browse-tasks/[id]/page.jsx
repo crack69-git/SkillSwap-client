@@ -12,7 +12,7 @@ const DetailsPage = async ({ params }) => {
   const data = await getSingleTask(id);
   console.log("Single Task:", data);
   return (
-    <div className="w-11/12 mx-auto my-5 grid grid-cols-3 gap-4">
+    <div className="w-11/12 max-sm:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4">
       <div className="col-span-2  rounded-lg p-5 shadow-lg">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-semibold">{data.TaskTitle}</h2>

@@ -8,6 +8,7 @@ import { authClient } from "@/lib/auth-client";
 import { Button, Drawer, Separator } from "@heroui/react";
 import ToogleTheme from "./dashboard/ToogleTheme";
 import { IoMenu } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi";
 
 const NavbarUser = () => {
   const { data } = authClient.useSession();
@@ -62,7 +63,7 @@ const NavbarUser = () => {
           <ToogleTheme></ToogleTheme>
 
           {data?.user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap max-sm:justify-center items-center gap-4">
               <Button variant="flat">
                 <Link
                   href={
@@ -82,6 +83,7 @@ const NavbarUser = () => {
               <p>Welcome, {data.user.name}</p>
 
               <Button color="danger" onPress={() => authClient.signOut()}>
+                <FiLogOut />
                 Logout
               </Button>
             </div>
