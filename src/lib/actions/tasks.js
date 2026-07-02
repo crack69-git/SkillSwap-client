@@ -43,13 +43,19 @@ export const patchProposal = async (proposalId, status) => {
   return res.json();
 };
 
-export const getFreelancer = async () => {
+export const getFreelancer = async (name = "", skill = "") => {
+  const params = new URLSearchParams();
+
+  if (name) params.append("name", name);
+  if (skill) params.append("skill", skill);
+
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/user/freelancer`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/freelancer?${params.toString()}`,
     {
-      cache: "no-store",
       method: "GET",
+      cache: "no-store",
     },
   );
+
   return res.json();
 };
