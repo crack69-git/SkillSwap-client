@@ -1,24 +1,31 @@
 import OpenTask from "@/Components/Shared/freelancer/OpenTask";
 import NeedtobeFreelancer from "@/Components/Shared/NeedtobeFreelancer";
+import PaginationComponent from "@/Components/Shared/PaginationComponent";
+// import PaginationComponent from "@/Components/Shared/PaginationComponent";
 import { getOpenTasks } from "@/lib/actions/freelancerProposals";
 import { auth } from "@/lib/auth";
 import { Input, Label, ListBox, Select } from "@heroui/react";
 import { headers } from "next/headers";
 
-import React from "react";
 import { RiFilter3Line } from "react-icons/ri";
 
 const page = async ({ searchParams }) => {
   const users = await auth.api.getSession({
-    headers: await headers(), // headers containing the user's session token
+    headers: await headers(),
   });
   const Role = users?.user?.role;
   console.log(Role);
   const params = await searchParams;
+
   const name = params.name || "";
   const skill = params.skill || "";
-  const data = await getOpenTasks(name, skill);
-  console.log(data);
+  const currentPage = parseInt(params.page || "1", 10);
+  const { tasks = [], totalItems = 0 } = await getOpenTasks(
+    name,
+    skill,
+    currentPage,
+  );
+  // console.log(data);
   const listbox = (
     <>
       <ListBox.Item id="web-dev" textValue="Web &amp; App Development">
@@ -293,10 +300,14 @@ const page = async ({ searchParams }) => {
         <div>
           <h1 className="text-3xl font-bold">Available Tasks</h1>
           <p>
-            Explore <span className="font-bold">{data.length}</span> available
+            Explore <span className="font-bold">{totalItems}</span> available
             tasks
           </p>
+
           <form method="GET" className="flex gap-3 my-5">
+            {/* Reset page parameter back to 1 on clean filter execution */}
+            <input type="hidden" name="page" value="1" />
+
             <div className="flex flex-col gap-1">
               <Label htmlFor="input-type-email">Task Name</Label>
               <Input
@@ -313,7 +324,7 @@ const page = async ({ searchParams }) => {
               className="w-[256px]"
               placeholder="Select"
             >
-              <Label>Catagory</Label>
+              <Label>Category</Label>
               <Select.Trigger>
                 <Select.Value />
                 <Select.Indicator />
@@ -325,17 +336,22 @@ const page = async ({ searchParams }) => {
 
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 rounded flex items-center gap-2 cursor-pointer  hover:bg-blue-600 transition-colors duration-300"
+              className="bg-blue-500 text-white px-4 rounded flex items-center gap-2 cursor-pointer hover:bg-blue-600 transition-colors duration-300"
             >
               <RiFilter3Line />
               Filter
             </button>
           </form>
+
+          {/* Cards Display Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-            {data.map((task) => (
+            {tasks.map((task) => (
               <OpenTask key={task._id} task={task} />
             ))}
           </div>
+
+          {/* Pagination Navigation Interface */}
+          <PaginationComponent totalItems={totalItems} itemsPerPage={9} />
         </div>
       ) : (
         <NeedtobeFreelancer />

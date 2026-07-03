@@ -1,11 +1,11 @@
-import React from "react";
+"use client";
+
 import { ThemeProvider } from "next-themes";
-export function Providers({ children }) {
+
+export default function Providers({ children }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
       {children}
     </ThemeProvider>
   );
 }
-
-export default Providers;

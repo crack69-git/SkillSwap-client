@@ -5,7 +5,7 @@ import { getOpenTasks } from "@/lib/actions/freelancerProposals";
 import OpenTask from "./freelancer/OpenTask";
 
 const FeatureUser = async () => {
-  const data = await getOpenTasks();
+  // const data = await getOpenTasks();
   // console.log(data);
   return (
     <div className="my-10 w-11/12 mx-auto">
@@ -20,9 +20,9 @@ const FeatureUser = async () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-        {data.slice(0, 6).map((task) => (
+        {/* {data.slice(0, 6).map((task) => (
           <OpenTask key={task._id} task={task} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

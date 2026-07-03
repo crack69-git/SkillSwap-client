@@ -1,18 +1,20 @@
 "use server";
-export const getOpenTasks = async (name = "", skill = "") => {
+export const getOpenTasks = async (name = "", skill = "", page = 1) => {
   const params = new URLSearchParams();
 
   if (name) params.append("name", name);
   if (skill) params.append("skill", skill);
+  params.append("page", page.toString());
+  params.append("limit", "9"); // Fixed at 9 items per page
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/open?${params.toString()}`,
     {
       cache: "no-store",
-      method: "GET",
     },
   );
-  return res.json();
+
+  return res.json(); // Returns { tasks: [...], totalItems: X }
 };
 export const getSingleTask = async (id) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/open/${id}`, {
