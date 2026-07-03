@@ -18,11 +18,11 @@ const page = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+    const formValue = Object.fromEntries(formData.entries());
     // console.log(data);
     const { data: res, error } = await authClient.signIn.email({
-      email: data.email, // required
-      password: data.password, // required
+      email: formValue.email, // required
+      password: formValue.password, // required
       rememberMe: true,
       // callbackURL: "/",
     });
@@ -38,7 +38,12 @@ const page = () => {
       alert("Login failed! please try again.");
     }
   };
-
+  const handleGoogle = async () => {
+    console.log("button clicked");
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className="w-11/12 mx-auto flex items-center justify-center my-20">
       <Form
@@ -85,7 +90,7 @@ const page = () => {
           <p className="bg-gray-500 h-0.5 w-full"></p>
         </div>
 
-        <Button variant="outline" className="w-full">
+        <Button onClick={handleGoogle} variant="outline" className="w-full">
           <FcGoogle />
           Sign-in with GOOGLE
         </Button>

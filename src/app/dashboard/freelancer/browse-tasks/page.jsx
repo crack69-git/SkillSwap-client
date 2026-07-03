@@ -1,4 +1,5 @@
 import OpenTask from "@/Components/Shared/freelancer/OpenTask";
+import PaginationComponent from "@/Components/Shared/PaginationComponent";
 import { getOpenTasks } from "@/lib/actions/freelancerProposals";
 import { Input, Label, ListBox, Select } from "@heroui/react";
 import React from "react";
@@ -8,7 +9,12 @@ const BrowseTasks = async ({ searchParams }) => {
   const params = await searchParams;
   const name = params.name || "";
   const skill = params.skill || "";
-  const data = await getOpenTasks(name, skill);
+  const currentPage = parseInt(params.page || "1", 10);
+  const { tasks = [], totalItems = 0 } = await getOpenTasks(
+    name,
+    skill,
+    currentPage,
+  );
   //   console.log("Open Tasks:", data);
   const listbox = (
     <>
@@ -317,14 +323,15 @@ const BrowseTasks = async ({ searchParams }) => {
         </button>
       </form>
       <div className="flex flex-col gap-5">
-        {data.length > 0 ? (
-          data.map((task) => <OpenTask key={task._id} task={task} />)
+        {tasks.length > 0 ? (
+          tasks.map((task) => <OpenTask key={task._id} task={task} />)
         ) : (
           <div className="text-gray-500 text-lg">
             No open tasks available at the moment.
           </div>
         )}
       </div>
+      <PaginationComponent totalItems={totalItems} itemsPerPage={9} />
     </div>
   );
 };

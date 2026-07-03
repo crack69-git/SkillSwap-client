@@ -1,6 +1,8 @@
 import { createAuthClient } from "better-auth/react";
+
 export const authClient = createAuthClient({
-  /** The base URL of the server (optional if you're using the same domain) */
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: process.env.BETTER_AUTH_URL, // Ensure this matches http://localhost:3000 in development
 });
-export const { signIn, signUp, useSession } = createAuthClient();
+
+// Export the destructured methods directly from the configured instance
+export const { signIn, signUp, useSession } = authClient;
