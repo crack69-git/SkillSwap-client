@@ -13,5 +13,20 @@ export async function proxy(request) {
 }
 
 export const config = {
-  matcher: ["/browse-freelancer"],
+  matcher: [
+    "/browse-freelancer",
+    "/dashboard/client",
+    "/dashboard/client/post-task",
+    "/dashboard/client/my-tasks",
+    "/dashboard/client/manage-proposals",
+    "/dashboard/freelancer",
+    "/dashboard/freelancer/my-proposals",
+    "/dashboard/freelancer/my-earnings",
+    "/dashboard/freelancer/edit-profile",
+    "/dashboard/admin",
+    "/dashboard/admin/manage-users",
+    "/dashboard/admin/manage-tasks",
+    "/dashboard/admin/transections-history",
+    "/success",
+  ],
 };

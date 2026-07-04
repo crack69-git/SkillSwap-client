@@ -1,6 +1,8 @@
 import DetailProposalForm from "@/Components/Shared/freelancer/DetailProposalForm";
 import { getSingleTask } from "@/lib/actions/freelancerProposals";
+import { auth } from "@/lib/auth";
 import { Separator } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 import { IoTimer } from "react-icons/io5";
 import { LuTimerOff } from "react-icons/lu";
@@ -8,9 +10,13 @@ import { MdCategory } from "react-icons/md";
 
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
-  console.log("Task ID:", id);
+  const user = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const role = user?.user?.role;
+  console.log(role);
   const data = await getSingleTask(id);
-  console.log("Single Task:", data);
+
   return (
     <div className="w-11/12 max-sm:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4">
       <div className="col-span-2  rounded-lg p-5 shadow-lg">
@@ -40,7 +46,9 @@ const DetailsPage = async ({ params }) => {
         <Separator className="my-4" />
         <p className=" text-gray-500">Posted By: {data.clientName}</p>
       </div>
-      <div className="border rounded-lg ">
+      <div
+        className={`border rounded-lg ${role === "client" ? "hidden" : "block"}`}
+      >
         <div className="bg-[#0F172A] rounded-lg p-4 text-white mb-4">
           <p className="font-bold text-xl">Submit Your Form</p>
           <p>Fill up the form to submit the form.</p>

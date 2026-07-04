@@ -1,6 +1,6 @@
+import { authClient } from "@/lib/auth-client";
 import { Button, Separator } from "@heroui/react";
 import Link from "next/link";
-import React from "react";
 
 const OpenTask = ({ task }) => {
   return (
@@ -23,7 +23,7 @@ const OpenTask = ({ task }) => {
       <Separator className="my-3" />
       <div className="flex justify-between items-center mt-2">
         <p>Deadline: {task.deadline}</p>
-        <div>
+        <div className={`flex gap-2 `}>
           <Link href={`/dashboard/freelancer/browse-tasks/${task._id}`}>
             <Button variant="primary" size="md" className="mt-2">
               View Details
