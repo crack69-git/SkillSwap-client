@@ -5,14 +5,15 @@ import Link from "next/link";
 
 import { authClient } from "@/lib/auth-client";
 
-import { Button, Drawer, Separator } from "@heroui/react";
+import { Button, Drawer, Separator, Spinner } from "@heroui/react";
 import ToogleTheme from "./dashboard/ToogleTheme";
 import { IoMenu } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
 import { redirect } from "next/navigation";
 
 const NavbarUser = () => {
-  const { data } = authClient.useSession();
+  const { data, isPending } = authClient.useSession();
+
   const links = (
     <>
       <Link href="/browse-tasks">
@@ -63,7 +64,11 @@ const NavbarUser = () => {
           {/* Theme Switch */}
           <ToogleTheme></ToogleTheme>
 
-          {data?.user ? (
+          {isPending ? (
+            <div className="flex items-center gap-4">
+              <Spinner />
+            </div>
+          ) : data?.user ? (
             <div className="flex flex-wrap max-sm:justify-center items-center gap-4">
               <Button variant="flat">
                 <Link

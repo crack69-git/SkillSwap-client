@@ -7,7 +7,8 @@ import StatUser from "@/Components/Shared/StatUser";
 import FeatureUser from "@/Components/Shared/FeatureUser";
 import TopFreelancer from "@/Components/Shared/TopFreelancer";
 import Ready from "@/Components/Shared/Ready";
-export default function Home() {
+
+export default async function Home() {
   return (
     <div>
       <div className="w-11/12 mx-auto py-10">

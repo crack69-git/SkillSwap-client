@@ -1,8 +1,9 @@
 // import InfoTrace from "@/Components/Shared/dashboard/InfoTrace";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import React from "react";
+import React, { Suspense } from "react";
 import InfoTrace from "../InfoTrace";
+import { Spinner } from "@heroui/react";
 
 const FreelancerPage = async () => {
   const session = await auth.api.getSession({
@@ -16,7 +17,16 @@ const FreelancerPage = async () => {
         <p>
           Welcome, {session?.user?.name}! This is your freelancer dashboard.
         </p>
-        <InfoTrace />
+        <Suspense
+          fallback={
+            <div className="flex flex-col items-center gap-2">
+              <Spinner size="xl" />
+              <span className="text-xs text-muted">...Loading</span>
+            </div>
+          }
+        >
+          <InfoTrace />
+        </Suspense>
       </div>
     </div>
   );
