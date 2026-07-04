@@ -28,14 +28,17 @@ export default function Home() {
                 size="large"
                 className="p-6 border border-gray-300 "
               >
-                <Link href="/" className="flex items-center gap-2">
+                <Link
+                  href="/dashboard/client/post-task"
+                  className="flex items-center gap-2"
+                >
                   {" "}
                   <FilePlus />
                   Post a Task
                 </Link>
               </Button>
               <Button variant="primary" size="large" className="p-6">
-                <Link href="/" className="flex items-center gap-2">
+                <Link href="/browse-tasks" className="flex items-center gap-2">
                   <Earth />
                   Browse Tasks
                 </Link>
