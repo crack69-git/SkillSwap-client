@@ -47,7 +47,12 @@ export default async function Home() {
             </div>
           </div>
           <div>
-            <Image src={heroimg} alt="Hero Image" className="rounded-3xl" />
+            <Image
+              loading="lazy"
+              src={heroimg}
+              alt="Hero Image"
+              className="rounded-3xl"
+            />
           </div>
         </div>
       </div>

@@ -19,12 +19,12 @@ const page = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValue = Object.fromEntries(formData.entries());
-    // console.log(data);
+    console.log(formValue);
     const { data: res, error } = await authClient.signIn.email({
       email: formValue.email, // required
       password: formValue.password, // required
       rememberMe: true,
-      // callbackURL: "/",
+      callbackURL: "/",
     });
     // console.log("Login response:", res.user);
     if (res) {

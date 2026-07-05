@@ -293,66 +293,62 @@ const page = async ({ searchParams }) => {
   );
   return (
     <div className="w-11/12 mx-auto my-5 min-h-screen">
-      {session?.user?.role === "freelancer" ? (
-        <div>
-          <h1 className="text-3xl font-bold">Available Tasks</h1>
-          <p>
-            Explore <span className="font-bold">{totalItems}</span> available
-            tasks
-          </p>
+      <div>
+        <h1 className="text-3xl font-bold">Available Tasks</h1>
+        <p>
+          Explore <span className="font-bold">{totalItems}</span> available
+          tasks
+        </p>
 
-          <form method="GET" className="flex gap-3 my-5">
-            {/* Reset page parameter back to 1 on clean filter execution */}
-            <input type="hidden" name="page" value="1" />
+        <form method="GET" className="flex gap-3 my-5">
+          {/* Reset page parameter back to 1 on clean filter execution */}
+          <input type="hidden" name="page" value="1" />
 
-            <div className="flex flex-col gap-1">
-              <Label htmlFor="input-type-email">Task Name</Label>
-              <Input
-                name="name"
-                defaultValue={name}
-                placeholder="Enter Task name"
-                type="text"
-              />
-            </div>
-
-            <Select
-              name="skill"
-              defaultSelectedKeys={skill ? [skill] : []}
-              className="w-[256px]"
-              placeholder="Select"
-            >
-              <Label>Category</Label>
-              <Select.Trigger>
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox>{listbox}</ListBox>
-              </Select.Popover>
-            </Select>
-
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 rounded flex items-center gap-2 cursor-pointer hover:bg-blue-600 transition-colors duration-300"
-            >
-              <RiFilter3Line />
-              Filter
-            </button>
-          </form>
-
-          {/* Cards Display Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-            {tasks.map((task) => (
-              <OpenTask key={task._id} task={task} />
-            ))}
+          <div className="flex flex-col gap-1">
+            <Label htmlFor="input-type-email">Task Name</Label>
+            <Input
+              name="name"
+              defaultValue={name}
+              placeholder="Enter Task name"
+              type="text"
+            />
           </div>
 
-          {/* Pagination Navigation Interface */}
-          <PaginationComponent totalItems={totalItems} itemsPerPage={9} />
+          <Select
+            name="skill"
+            defaultSelectedKeys={skill ? [skill] : []}
+            className="w-[256px]"
+            placeholder="Select"
+          >
+            <Label>Category</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>{listbox}</ListBox>
+            </Select.Popover>
+          </Select>
+
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 rounded flex items-center gap-2 cursor-pointer hover:bg-blue-600 transition-colors duration-300"
+          >
+            <RiFilter3Line />
+            Filter
+          </button>
+        </form>
+
+        {/* Cards Display Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+          {tasks.map((task) => (
+            <OpenTask key={task._id} task={task} />
+          ))}
         </div>
-      ) : (
-        <NeedtobeFreelancer />
-      )}
+
+        {/* Pagination Navigation Interface */}
+        <PaginationComponent totalItems={totalItems} itemsPerPage={9} />
+      </div>
     </div>
   );
 };

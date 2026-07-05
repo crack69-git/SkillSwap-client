@@ -8,7 +8,7 @@ const ManagetasksPage = async () => {
   console.log("All Tasks:", task);
   return (
     <div className="w-11/12 mx-auto my-5">
-      <h2>Manage Tasks</h2>
+      <h2 className="text-3xl font-bold">Manage Tasks</h2>
       <div className="mt-5">
         <Table variant="secondary">
           <Table.ScrollContainer>

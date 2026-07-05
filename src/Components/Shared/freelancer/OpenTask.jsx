@@ -1,8 +1,9 @@
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
 import { Button, Separator } from "@heroui/react";
+import { headers } from "next/headers";
 import Link from "next/link";
 
-const OpenTask = ({ task }) => {
+const OpenTask = async ({ task }) => {
   return (
     <div className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4">
       <p

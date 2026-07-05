@@ -47,7 +47,7 @@ const DetailsPage = async ({ params }) => {
         <p className=" text-gray-500">Posted By: {data.clientName}</p>
       </div>
       <div
-        className={`border rounded-lg ${role === "client" ? "hidden" : "block"}`}
+        className={`border rounded-lg ${role === "client" || role === "admin" ? "hidden" : "block"}`}
       >
         <div className="bg-[#0F172A] rounded-lg p-4 text-white mb-4">
           <p className="font-bold text-xl">Submit Your Form</p>
