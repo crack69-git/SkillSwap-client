@@ -1,5 +1,5 @@
 "use server";
-export const getOpenTasks = async (name = "", skill = "", page = 1, token) => {
+export const getOpenTasks = async (name = "", skill = "", page = 1) => {
   const params = new URLSearchParams();
 
   if (name) params.append("name", name);
@@ -11,20 +11,14 @@ export const getOpenTasks = async (name = "", skill = "", page = 1, token) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/open?${params.toString()}`,
     {
       cache: "no-store",
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
     },
   );
 
   return res.json(); // Returns { tasks: [...], totalItems: X }
 };
-export const getSingleTask = async (id, token) => {
+export const getSingleTask = async (id) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/open/${id}`, {
     method: "GET",
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
   });
   return res.json();
 };

@@ -48,12 +48,13 @@ export const getAllProposalById = async (id, token) => {
   return res.json();
 };
 
-export const patchProposal = async (proposalId, status) => {
+export const patchProposal = async (token, proposalId, status) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${proposalId}`,
     {
       method: "PATCH",
       headers: {
+        authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(status),

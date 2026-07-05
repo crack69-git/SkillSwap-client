@@ -22,7 +22,7 @@ const page = async ({ searchParams }) => {
     skill,
     currentPage,
   );
-  // console.log(data);
+
   const listbox = (
     <>
       <ListBox.Item id="web-dev" textValue="Web &amp; App Development">

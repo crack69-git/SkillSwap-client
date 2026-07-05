@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const FeatureUser = async () => {
   const data = await getFeatureTasks();
-  console.log("Feature Tasks Data:", data); // Log the fetched data for debugging
+
   return (
     <div className="my-10 w-11/12 mx-auto">
       <h3 className="text-4xl max-sm:text-2xl font-bold ">
@@ -24,9 +24,9 @@ const FeatureUser = async () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-        {/* {data.map((task) => (
+        {data.map((task) => (
           <OpenTask key={task._id} task={task} />
-        ))} */}
+        ))}
       </div>
     </div>
   );

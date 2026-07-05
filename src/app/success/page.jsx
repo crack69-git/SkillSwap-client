@@ -6,6 +6,7 @@ import { Button, Card } from "@heroui/react";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { getToken } from "@/lib/actions/tokenGet";
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams;
@@ -40,16 +41,15 @@ export default async function Success({ searchParams }) {
       paymentDate: new Date(),
       deadline: metadata.deadline,
     };
-
-    const paymentResponse = await createPayment(paymentNow);
+    const token = await getToken();
+    const paymentResponse = await createPayment(paymentNow, token);
 
     if (paymentResponse.ok) {
-      console.log("Payment created successfully:", paymentResponse);
-      const res = await patchProposal(session.metadata.proposalId, {
+      const res = await patchProposal(token, session.metadata.proposalId, {
         status: "accepted",
       });
 
-      const taskRes = await patchTaskStatus(metadata.taskId, {
+      const taskRes = await patchTaskStatus(token, metadata.taskId, {
         status: "in-progress",
       });
     }

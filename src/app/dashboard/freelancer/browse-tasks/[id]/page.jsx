@@ -15,8 +15,9 @@ const DetailsPage = async ({ params }) => {
     headers: await headers(),
   });
   const role = user?.user?.role;
-  const token = await getToken();
-  const data = await getSingleTask(id, token);
+
+  const data = await getSingleTask(id);
+  console.log(data, "data from details page");
 
   return (
     <div className="w-11/12 max-sm:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4">
@@ -48,7 +49,7 @@ const DetailsPage = async ({ params }) => {
         <p className=" text-gray-500">Posted By: {data.clientName}</p>
       </div>
       <div
-        className={`border rounded-lg ${role === "client" || role === "admin" ? "hidden" : "block"}`}
+        className={`border rounded-lg ${role !== "freelancer" ? "hidden" : "block"}`}
       >
         <div className="bg-[#0F172A] rounded-lg p-4 text-white mb-4">
           <p className="font-bold text-xl">Submit Your Form</p>
