@@ -10,10 +10,10 @@ const PostATaskPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log("Session in PostATaskPage:", session.user.role);
+
   return (
     <div className="w-11/12 mx-auto py-5">
-      {session.user.role === "client" || session.user.role === "admin" ? (
+      {session.user.role === "client" ? (
         <div>
           <h2 className="text-4xl font-bold">Post A Task</h2>
           <p className="mb-10">

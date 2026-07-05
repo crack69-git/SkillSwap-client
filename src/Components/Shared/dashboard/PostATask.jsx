@@ -19,14 +19,15 @@ import {
 import { createTask } from "@/lib/actions/tasks";
 import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { getToken } from "@/lib/actions/tokenGet";
 const PostATask = () => {
   const { data: session } = authClient.useSession();
-  console.log("PostATask Session:", session);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    // console.log(data);
+    const token = await getToken(); // extract the token from the response
     const tasks = {
       TaskTitle: data.TaskTitle,
       category: data.category,
@@ -40,8 +41,8 @@ const PostATask = () => {
       description: data.description,
     };
 
-    const res = await createTask(tasks);
-    console.log(res);
+    const res = await createTask(tasks, token);
+
     if (res) {
       alert("Task created successfully!");
       redirect("/dashboard/client/my-tasks");

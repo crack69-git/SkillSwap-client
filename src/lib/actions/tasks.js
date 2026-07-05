@@ -9,31 +9,41 @@ export const getFeatureTasks = async () => {
   return res.json();
 };
 
-export const createTask = async (data) => {
+export const createTask = async (data, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
   });
   return res.json();
 };
 
-export const getTasks = async () => {
+export const getTasks = async (token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
     method: "GET",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
   return res.json();
 };
 
-export const getAllProposalById = async (id) => {
+export const getAllProposalById = async (id, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/client/${id}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
+  if (!res.ok) {
+    throw new Error("Failed to fetch proposals");
+  }
   console.log("Fetched Proposals:", res);
   return res.json();
 };

@@ -1,5 +1,6 @@
 import ManageProposalsClient from "@/Components/Shared/dashboard/ManageProposalsClient";
 import { getAllProposalById } from "@/lib/actions/tasks";
+import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
 import { headers } from "next/headers";
@@ -9,9 +10,10 @@ const ManageProposals = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
   console.log("Session Data:", session);
   const userId = session?.user?.id;
+  const token = await getToken(); // extract the token from the response
 
-  const data = await getAllProposalById(userId);
-  console.log("Proposals Data:", data);
+  const data = await getAllProposalById(userId, token);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h1 className="text-3xl font-bold mb-5">Manage Proposals</h1>

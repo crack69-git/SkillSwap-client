@@ -1,9 +1,11 @@
 import MyTaskCardClient from "@/Components/Shared/dashboard/MyTaskCardClient";
 import React from "react";
 import { getTasks } from "@/lib/actions/tasks";
+import { getToken } from "@/lib/actions/tokenGet";
 const MyTaskPage = async () => {
-  const res = await getTasks();
-  console.log(res);
+  const token = await getToken(); // extract the token from the response
+  const res = await getTasks(token);
+
   return (
     <div className="mt-5 w-11/12 mx-auto">
       <h2 className="text-4xl font-bold">My Tasks</h2>

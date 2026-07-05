@@ -22,7 +22,7 @@ const ClientDashboard = async () => {
           </div>
         }
       >
-        <InfoTrace user={user} />
+        <InfoTrace />
       </Suspense>
     </div>
   );

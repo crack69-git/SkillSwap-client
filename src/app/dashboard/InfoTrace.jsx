@@ -4,6 +4,7 @@ import {
   getSumOfPayments,
 } from "@/lib/actions/freelancerProposals";
 import { getTasks } from "@/lib/actions/tasks";
+import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import React from "react";
@@ -12,17 +13,13 @@ import { MdOutlinePendingActions } from "react-icons/md";
 import { RiProgress6Line } from "react-icons/ri";
 import { VscCopilotSuccess } from "react-icons/vsc";
 
-const InfoTrace = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const userId = session?.user?.id;
-  const users = await getAllUsers();
-  const res = await getTasks();
-  const userProposals = await getProposals(session?.user?.email);
-  console.log("User Proposals:", userProposals);
-  const Earning = await getSumOfPayments(session?.user?.email);
-  console.log("Total Earnings:", Earning);
+const InfoTrace = async ({ user }) => {
+  const userId = user?.id;
+  const token = await getToken(); // extract the token from the response
+  const users = await getAllUsers(token);
+  const res = await getTasks(token);
+  const userProposals = await getProposals(user?.email, token);
+  const Earning = await getSumOfPayments(user?.email, token);
 
   const client = (
     <>
@@ -136,9 +133,9 @@ const InfoTrace = async () => {
   );
   return (
     <div className="mt-10 grid grid-cols-4 gap-10 max-sm:grid-cols-1 max-md:grid-cols-2">
-      {session?.user?.role === "client"
+      {user?.role === "client"
         ? client
-        : session?.user?.role === "freelancer"
+        : user?.role === "freelancer"
           ? freelancer
           : admin}
     </div>

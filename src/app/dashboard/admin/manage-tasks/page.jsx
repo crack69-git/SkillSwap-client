@@ -1,9 +1,15 @@
 import TaskCardSectionAdmin from "@/Components/Shared/admin/TaskCardSectionAdmin";
 import { getTasks } from "@/lib/actions/tasks";
+import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
+import { headers } from "next/headers";
 import React from "react";
 
 const ManagetasksPage = async () => {
+  const token = await auth.api.getToken({
+    headers: await headers(), // pass request headers
+  });
+  console.log("Token:", token);
   const task = await getTasks();
   console.log("All Tasks:", task);
   return (

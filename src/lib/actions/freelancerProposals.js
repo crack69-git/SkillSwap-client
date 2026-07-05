@@ -44,13 +44,19 @@ export const getFreelancerProposals = async (freelancerId) => {
   return res.json();
 };
 
-export const getProposals = async (mail) => {
+export const getProposals = async (mail, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/getprop/${encodeURIComponent(mail)}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
+  if (!res.ok) {
+    throw new Error("Failed to fetch proposals");
+  }
   return res.json();
 };
 
@@ -78,11 +84,14 @@ export const getFreelancerProfile = async (freelancerId) => {
   return res.json();
 };
 
-export const getSumOfPayments = async (freelancerEmail) => {
+export const getSumOfPayments = async (freelancerEmail, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/payments/total/${encodeURIComponent(freelancerEmail)}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return res.json();
