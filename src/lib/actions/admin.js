@@ -11,13 +11,14 @@ export const getAllUsers = async (token) => {
   return users;
 };
 
-export const patchUser = async (userId, userData) => {
+export const patchUser = async (userId, userData, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/${userId}`,
     {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(userData),
     },
@@ -26,13 +27,14 @@ export const patchUser = async (userId, userData) => {
   return updatedUser;
 };
 
-export const patchTask = async (taskId, taskData) => {
+export const patchTask = async (taskId, taskData, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}`,
     {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(taskData),
     },
@@ -41,13 +43,14 @@ export const patchTask = async (taskId, taskData) => {
   return updatedTask;
 };
 
-export const deleteTask = async (taskId) => {
+export const deleteTask = async (taskId, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}`,
     {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
     },
   );

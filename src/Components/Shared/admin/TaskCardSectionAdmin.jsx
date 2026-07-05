@@ -4,13 +4,13 @@ import { Button, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const TaskCardSectionAdmin = ({ task }) => {
+const TaskCardSectionAdmin = ({ task, token }) => {
   const router = useRouter();
   const handleAcceptRequest = async (taskId, currentState) => {
     console.log("Task ID:", taskId);
     console.log("Current State:", currentState);
     const newState = currentState === "pending" ? "accepted" : "pending";
-    const res = await patchTask(taskId, { state: newState });
+    const res = await patchTask(taskId, { state: newState }, token);
     if (res.success) {
       alert(`Task state updated to ${newState}`);
       router.refresh();
@@ -19,7 +19,7 @@ const TaskCardSectionAdmin = ({ task }) => {
     }
   };
   const handleDeleteRequest = async (taskId) => {
-    const res = await deleteTask(taskId);
+    const res = await deleteTask(taskId, token);
     if (res.success) {
       alert("Task deleted successfully");
       router.refresh();

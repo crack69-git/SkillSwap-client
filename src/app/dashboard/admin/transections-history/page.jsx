@@ -1,11 +1,13 @@
 import TransactionHistory from "@/Components/Shared/admin/TransactionHistory";
 import { getAllPayments } from "@/lib/actions/payments";
+import { getToken } from "@/lib/actions/tokenGet";
 import { Table } from "@heroui/react";
 import React from "react";
 
 const page = async () => {
-  const payments = await getAllPayments();
-  //   console.log("Fetched Payments:", payments);
+  const token = await getToken();
+  const payments = await getAllPayments(token);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h1 className="mb-5 text-3xl font-bold">Transaction History</h1>

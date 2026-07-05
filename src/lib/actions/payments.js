@@ -47,11 +47,14 @@ export const getFreelancerPayments = async (freelancerEmail) => {
   return res.json();
 };
 
-export const getAllPayments = async () => {
+export const getAllPayments = async (token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/payments/all`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return res.json();

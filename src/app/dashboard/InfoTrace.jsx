@@ -116,7 +116,7 @@ const InfoTrace = async ({ user }) => {
           <VscCopilotSuccess />
           Total Revenue
         </p>
-        <p className="text-3xl font-bold">
+        <p className="text-3xl font-bold text-center">
           {res.filter((task) => task.status === "Completed").length}
         </p>
       </div>
@@ -125,7 +125,7 @@ const InfoTrace = async ({ user }) => {
           <RiProgress6Line />
           Active Tasks
         </p>
-        <p className="text-3xl font-bold">
+        <p className="text-3xl font-bold  text-center">
           {res.filter((task) => task.status === "in-progress").length}
         </p>
       </div>

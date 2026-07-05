@@ -1,11 +1,12 @@
 import ManageUsers from "@/Components/Shared/admin/ManageUsers";
 import { getAllUsers } from "@/lib/actions/admin";
+import { getToken } from "@/lib/actions/tokenGet";
 import { Button, Table } from "@heroui/react";
 import React from "react";
 
 const page = async () => {
-  const users = await getAllUsers();
-  console.log("All Users:", users);
+  const token = await getToken();
+  const users = await getAllUsers(token);
 
   return (
     <div className="w-11/12 mx-auto my-5">

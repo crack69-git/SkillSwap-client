@@ -1,8 +1,15 @@
 import React, { Suspense } from "react";
 import InfoTrace from "../InfoTrace";
 import { Spinner } from "@heroui/react";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const AdminPage = () => {
+const AdminPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const user = session?.user;
   return (
     <div className="w-11/12 mx-auto my-5">
       <h2 className="text-3xl font-bold">Admin Dashboard</h2>
@@ -19,7 +26,7 @@ const AdminPage = () => {
         }
       >
         <div className="mt-5">
-          <InfoTrace />
+          <InfoTrace user={user} />
         </div>
       </Suspense>
     </div>

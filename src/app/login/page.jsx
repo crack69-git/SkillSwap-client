@@ -24,7 +24,7 @@ const page = () => {
       email: formValue.email, // required
       password: formValue.password, // required
       rememberMe: true,
-      callbackURL: "/",
+      // callbackURL: "/",
     });
     // console.log("Login response:", res.user);
     if (res) {

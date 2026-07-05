@@ -1,17 +1,15 @@
 import TaskCardSectionAdmin from "@/Components/Shared/admin/TaskCardSectionAdmin";
 import { getTasks } from "@/lib/actions/tasks";
+import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
 import { headers } from "next/headers";
 import React from "react";
 
 const ManagetasksPage = async () => {
-  const token = await auth.api.getToken({
-    headers: await headers(), // pass request headers
-  });
-  console.log("Token:", token);
-  const task = await getTasks();
-  console.log("All Tasks:", task);
+  const token = await getToken();
+  const tasks = await getTasks(token);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h2 className="text-3xl font-bold">Manage Tasks</h2>
@@ -28,8 +26,8 @@ const ManagetasksPage = async () => {
                 <Table.Column>Action</Table.Column>
               </Table.Header>
               <Table.Body>
-                {task.map((t, index) => (
-                  <TaskCardSectionAdmin key={index} task={t} />
+                {tasks.map((task, index) => (
+                  <TaskCardSectionAdmin key={index} task={task} token={token} />
                 ))}
               </Table.Body>
             </Table.Content>

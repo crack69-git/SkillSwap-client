@@ -1,17 +1,16 @@
 "use client";
 import { patchUser } from "@/lib/actions/admin";
+import { getToken } from "@/lib/actions/tokenGet";
 import { Button, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const ManageUsers = ({ user }) => {
-  //   console.log(user);
   const router = useRouter();
-
   const handleUserStateChange = async (userId, userState) => {
+    const token = await getToken();
     const newState = userState === "unblocked" ? "blocked" : "unblocked";
-
-    const res = await patchUser(userId, { userState: newState });
+    const res = await patchUser(userId, { userState: newState }, token);
     if (res.success) {
       alert(`User has been ${newState}`);
       router.refresh();
