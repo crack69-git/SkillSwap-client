@@ -1,5 +1,6 @@
 import EarningPage from "@/Components/Shared/freelancer/EarningPage";
 import { getFreelancerPayments } from "@/lib/actions/payments";
+import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
 import { headers } from "next/headers";
@@ -10,8 +11,9 @@ const page = async () => {
     headers: await headers(),
   });
   const mail = session?.user?.email;
-  const data = await getFreelancerPayments(mail);
-  console.log("Fetched Payments:", data);
+  const token = await getToken();
+  const data = await getFreelancerPayments(mail, token);
+
   return (
     <div className="w-11/12 mx-auto my-5">
       <h1 className="text-2xl font-bold mb-5">My Earnings</h1>

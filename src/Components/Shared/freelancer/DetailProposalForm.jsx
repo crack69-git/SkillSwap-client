@@ -4,6 +4,7 @@ import {
   getSingleTask,
   submitProposal,
 } from "@/lib/actions/freelancerProposals";
+import { getToken } from "@/lib/actions/tokenGet";
 import { authClient } from "@/lib/auth-client";
 import { FloppyDisk } from "@gravity-ui/icons";
 import {
@@ -22,7 +23,6 @@ import {
 
 const DetailProposalForm = ({ data: current }) => {
   const { data: session } = authClient.useSession();
-  console.log("Data", current);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const DetailProposalForm = ({ data: current }) => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     const toady = new Date();
-
+    const token = await getToken();
     const proposalData = {
       clientId: current.clientId,
       bid: data.bid,
@@ -43,8 +43,8 @@ const DetailProposalForm = ({ data: current }) => {
       freelancerMail: session?.user?.email,
       status: "pending",
     };
-    console.log("Form Data:", proposalData);
-    const getproposal = await getFreelancerProposals(session?.user?.id);
+
+    const getproposal = await getFreelancerProposals(session?.user?.id, token);
     const existingProposal = getproposal.find(
       (proposal) => proposal.taskId === current._id,
     );
@@ -52,7 +52,7 @@ const DetailProposalForm = ({ data: current }) => {
       alert("You have already submitted a proposal for this task.");
       return;
     } else {
-      const res = await submitProposal(proposalData);
+      const res = await submitProposal(proposalData, token);
       if (res) {
         alert("Proposal submitted successfully!");
         e.target.reset();

@@ -1,5 +1,6 @@
 import FreelancerActiveProposal from "@/Components/Shared/freelancer/FreelancerActiveProposal";
 import { getAccepterProposals } from "@/lib/actions/payments";
+import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import React from "react";
@@ -9,9 +10,10 @@ const page = async () => {
     headers: await headers(),
   });
   const freelancerEmail = session?.user?.email;
-  //   console.log("freelancerEmail", freelancerEmail);
-  const data = await getAccepterProposals(freelancerEmail);
-  console.log("data", data);
+  const token = await getToken();
+  console.log(token);
+  const data = await getAccepterProposals(freelancerEmail, token);
+  console.log(data);
 
   return (
     <div className="w-11/12 mx-auto my-5">

@@ -1,5 +1,6 @@
 import DetailProposalForm from "@/Components/Shared/freelancer/DetailProposalForm";
 import { getSingleTask } from "@/lib/actions/freelancerProposals";
+import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { Separator } from "@heroui/react";
 import { headers } from "next/headers";
@@ -14,8 +15,8 @@ const DetailsPage = async ({ params }) => {
     headers: await headers(),
   });
   const role = user?.user?.role;
-  console.log(role);
-  const data = await getSingleTask(id);
+  const token = await getToken();
+  const data = await getSingleTask(id, token);
 
   return (
     <div className="w-11/12 max-sm:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4">

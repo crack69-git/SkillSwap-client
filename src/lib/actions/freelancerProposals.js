@@ -1,5 +1,5 @@
 "use server";
-export const getOpenTasks = async (name = "", skill = "", page = 1) => {
+export const getOpenTasks = async (name = "", skill = "", page = 1, token) => {
   const params = new URLSearchParams();
 
   if (name) params.append("name", name);
@@ -11,34 +11,44 @@ export const getOpenTasks = async (name = "", skill = "", page = 1) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/open?${params.toString()}`,
     {
       cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
 
   return res.json(); // Returns { tasks: [...], totalItems: X }
 };
-export const getSingleTask = async (id) => {
+export const getSingleTask = async (id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/open/${id}`, {
     method: "GET",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
   return res.json();
 };
 
-export const submitProposal = async (proposalData) => {
+export const submitProposal = async (proposalData, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/proposals`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(proposalData),
   });
   return res.json();
 };
 
-export const getFreelancerProposals = async (freelancerId) => {
+export const getFreelancerProposals = async (freelancerId, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${freelancerId}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return res.json();
@@ -60,13 +70,14 @@ export const getProposals = async (mail, token) => {
   return res.json();
 };
 
-export const freelancerPatch = async (freelancerId, updatedData) => {
+export const freelancerPatch = async (freelancerId, updatedData, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/${freelancerId}`,
     {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedData),
     },

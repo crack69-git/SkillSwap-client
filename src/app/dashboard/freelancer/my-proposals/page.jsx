@@ -4,16 +4,17 @@ import { Table } from "@heroui/react";
 import { headers } from "next/headers";
 import React from "react";
 import MyProposalTable from "@/Components/Shared/admin/MyProposalTable";
+import { getToken } from "@/lib/actions/tokenGet";
 const MyProposalPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   const email = session?.user?.email;
-  console.log("User Email:", email);
 
-  const res = await getProposals(email);
-  console.log("My Proposals:", res);
+  const token = await getToken();
+
+  const res = await getProposals(email, token);
 
   return (
     <div className="w-11/12 mx-auto my-5">

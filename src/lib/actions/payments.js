@@ -25,23 +25,29 @@ export const patchTaskStatus = async (taskId, statusData) => {
   return res.json();
 };
 
-export const getAccepterProposals = async (freelancerEmail) => {
+export const getAccepterProposals = async (freelancerEmail, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/freelancer/${encodeURIComponent(
       freelancerEmail,
     )}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return res.json();
 };
 
-export const getFreelancerPayments = async (freelancerEmail) => {
+export const getFreelancerPayments = async (freelancerEmail, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/payments/sum/${encodeURIComponent(freelancerEmail)}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return res.json();

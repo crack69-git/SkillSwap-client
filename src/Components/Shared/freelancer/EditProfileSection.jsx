@@ -15,6 +15,8 @@ import {
   TextField,
 } from "@heroui/react";
 import { freelancerPatch } from "@/lib/actions/freelancerProposals";
+import { getToken } from "@/lib/actions/tokenGet";
+import { FaSave, FaUndo } from "react-icons/fa";
 const EditProfileSection = ({ user }) => {
   const [skills, setSkills] = useState([]);
   const onSubmit = async (e) => {
@@ -22,8 +24,8 @@ const EditProfileSection = ({ user }) => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     data.skills = skills;
-    console.log(data);
-    const res = await freelancerPatch(user.id, data);
+    const token = await getToken();
+    const res = await freelancerPatch(user.id, data, token);
     if (res.success) {
       alert("Profile updated successfully!");
     } else {
@@ -229,7 +231,7 @@ const EditProfileSection = ({ user }) => {
 
   return (
     <div>
-      <Form className="w-full max-w-96" onSubmit={onSubmit}>
+      <Form className="w-full max-w-96 mt-5" onSubmit={onSubmit}>
         <Fieldset>
           <FieldGroup>
             <TextField name="name">
@@ -244,7 +246,7 @@ const EditProfileSection = ({ user }) => {
             </TextField>
             <Select
               name="skills"
-              className="w-[256px]"
+              className="w-96"
               placeholder="Select skills"
               selectionMode="multiple"
               value={skills}
@@ -272,14 +274,16 @@ const EditProfileSection = ({ user }) => {
             <TextField name="bio">
               <Label>Bio</Label>
               <TextArea placeholder={user?.bio} />
-              <Description>Minimum 10 characters</Description>
-              <FieldError />
             </TextField>
           </FieldGroup>
           <Fieldset.Actions>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit">
+              <FaSave />
+              Save changes
+            </Button>
             <Button type="reset" variant="secondary">
-              Cancel
+              <FaUndo />
+              Reset
             </Button>
           </Fieldset.Actions>
         </Fieldset>

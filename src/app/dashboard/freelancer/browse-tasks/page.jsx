@@ -1,6 +1,7 @@
 import OpenTask from "@/Components/Shared/freelancer/OpenTask";
 import PaginationComponent from "@/Components/Shared/PaginationComponent";
 import { getOpenTasks } from "@/lib/actions/freelancerProposals";
+import { getToken } from "@/lib/actions/tokenGet";
 import { Input, Label, ListBox, Select } from "@heroui/react";
 import React from "react";
 import { RiFilter3Line } from "react-icons/ri";
@@ -10,12 +11,14 @@ const BrowseTasks = async ({ searchParams }) => {
   const name = params.name || "";
   const skill = params.skill || "";
   const currentPage = parseInt(params.page || "1", 10);
+  const token = await getToken();
   const { tasks = [], totalItems = 0 } = await getOpenTasks(
     name,
     skill,
     currentPage,
+    token,
   );
-  //   console.log("Open Tasks:", data);
+
   const listbox = (
     <>
       <ListBox.Item id="web-dev" textValue="Web &amp; App Development">
