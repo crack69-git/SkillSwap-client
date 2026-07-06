@@ -23,6 +23,7 @@ import {
 } from "@heroui/react";
 import { Rocket } from "lucide-react";
 import { GoFileSubmodule } from "react-icons/go";
+import { Bounce, toast } from "react-toastify";
 
 const DetailProposalForm = ({ data: current }) => {
   const variant = "blur";
@@ -53,15 +54,46 @@ const DetailProposalForm = ({ data: current }) => {
       (proposal) => proposal.taskId === current._id,
     );
     if (existingProposal) {
-      alert("You have already submitted a proposal for this task.");
+      toast.error("You have already submitted a proposal for this task.", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
       return;
     } else {
       const res = await submitProposal(proposalData, token);
       if (res) {
-        alert("Proposal submitted successfully!");
+        toast.success("Proposal submitted successfully!", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         e.target.reset();
       } else {
-        alert("Failed to submit proposal. Please try again.");
+        toast.error("Failed to submit proposal. Please try again.", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     }
   };

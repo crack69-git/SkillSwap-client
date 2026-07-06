@@ -3,17 +3,16 @@ import { getAllUsers } from "@/lib/actions/admin";
 import { authClient } from "@/lib/auth-client";
 import {
   Button,
-  Description,
   FieldError,
   Form,
   Input,
   Label,
-  Separator,
   TextField,
 } from "@heroui/react";
 import { redirect, useRouter } from "next/navigation";
 
 import { FcGoogle } from "react-icons/fc";
+import { Bounce, toast } from "react-toastify";
 const page = () => {
   const router = useRouter();
   const onSubmit = async (e) => {
@@ -28,19 +27,46 @@ const page = () => {
       rememberMe: true,
       // callbackURL: "/",
     });
-    if (error) {
-      alert(error.message);
-      return;
-    }
+
     if (res) {
       if (res?.user?.userState === "blocked") {
-        alert("Your account is blocked. Please contact support.");
+        toast.error("Your account is blocked. Please contact support.", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         return;
       }
-      alert("Login successful!");
+      toast.success("Login successful!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       router.push("/");
     } else {
-      alert("Login failed! please try again.");
+      toast.error(`Login failed! please try again.`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   const handleGoogle = async () => {
@@ -48,6 +74,31 @@ const page = () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
+    if (data) {
+      toast.success("Login successful!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      toast.error(`Login failed! please try again.`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
   };
   return (
     <div className="w-11/12 mx-auto flex items-center justify-center my-20">

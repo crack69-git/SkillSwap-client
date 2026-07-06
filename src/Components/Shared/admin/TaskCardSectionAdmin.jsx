@@ -3,6 +3,7 @@ import { deleteTask, patchTask } from "@/lib/actions/admin";
 import { Button, Modal, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { Bounce, toast } from "react-toastify";
 
 const TaskCardSectionAdmin = ({ task, token }) => {
   const router = useRouter();
@@ -12,19 +13,60 @@ const TaskCardSectionAdmin = ({ task, token }) => {
     const newState = currentState === "pending" ? "accepted" : "pending";
     const res = await patchTask(taskId, { state: newState }, token);
     if (res.success) {
-      alert(`Task state updated to ${newState}`);
+      toast.success(`Task state updated to ${newState}`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
       router.refresh();
     } else {
-      alert("Failed to update task state");
+      toast.error("Failed to update task state", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   const handleDeleteRequest = async (taskId) => {
     const res = await deleteTask(taskId, token);
     if (res.success) {
-      alert("Task deleted successfully");
+      toast.success("Task deleted successfully", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       router.refresh();
     } else {
-      alert("Failed to delete task");
+      toast.error("Failed to delete task", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   return (

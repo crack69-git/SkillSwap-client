@@ -20,6 +20,7 @@ import { createTask } from "@/lib/actions/tasks";
 import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { getToken } from "@/lib/actions/tokenGet";
+import { Bounce, toast } from "react-toastify";
 const PostATask = () => {
   const { data: session } = authClient.useSession();
 
@@ -44,10 +45,30 @@ const PostATask = () => {
     const res = await createTask(tasks, token);
 
     if (res) {
-      alert("Task created successfully!");
+      toast.success("Task created successfully!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       redirect("/dashboard/client/my-tasks");
     } else {
-      alert("Failed to create task.");
+      toast.error("Failed to create task.", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   const listbox = (

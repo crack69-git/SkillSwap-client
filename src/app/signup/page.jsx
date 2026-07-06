@@ -16,6 +16,7 @@ import {
 } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 const RegisterPage = () => {
   const [value, setValue] = useState("option1");
   const onSubmit = async (e) => {
@@ -36,10 +37,30 @@ const RegisterPage = () => {
       callbackURL: "/",
     });
     if (res) {
-      alert("signup successful");
+      toast.success("Sign up successful!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       redirect("/login");
     } else {
-      alert(error.message);
+      toast.error(`Sign up failed! ${error.message}`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       return;
     }
   };

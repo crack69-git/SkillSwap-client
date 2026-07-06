@@ -17,6 +17,7 @@ import {
 import { freelancerPatch } from "@/lib/actions/freelancerProposals";
 import { getToken } from "@/lib/actions/tokenGet";
 import { FaSave, FaUndo } from "react-icons/fa";
+import { Bounce, toast } from "react-toastify";
 const EditProfileSection = ({ user }) => {
   console.log("user id", user.id);
   const [skills, setSkills] = useState([]);
@@ -41,10 +42,31 @@ const EditProfileSection = ({ user }) => {
     const res = await freelancerPatch(user.id, data, token);
 
     if (res.success) {
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
       window.location.reload();
     } else {
-      alert(`Something went wrong: ${res.error || "Unknown Error"}`);
+      toast.error(`Something went wrong: ${res.error || "Unknown Error"}`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 

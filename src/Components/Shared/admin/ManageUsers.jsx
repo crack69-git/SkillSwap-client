@@ -5,6 +5,7 @@ import { Button, Modal, Table } from "@heroui/react";
 import { Rocket } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const ManageUsers = ({ user }) => {
   const router = useRouter();
@@ -13,10 +14,30 @@ const ManageUsers = ({ user }) => {
     const newState = userState === "unblocked" ? "blocked" : "unblocked";
     const res = await patchUser(userId, { userState: newState }, token);
     if (res.success) {
-      alert(`User has been ${newState}`);
+      toast.success(`User has been ${newState}`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       router.refresh();
     } else {
-      alert(`Failed to update user state: ${res.message}`);
+      toast.error("Failed to update user state", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   return (
