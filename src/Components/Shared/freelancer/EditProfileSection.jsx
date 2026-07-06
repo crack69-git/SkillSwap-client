@@ -18,18 +18,33 @@ import { freelancerPatch } from "@/lib/actions/freelancerProposals";
 import { getToken } from "@/lib/actions/tokenGet";
 import { FaSave, FaUndo } from "react-icons/fa";
 const EditProfileSection = ({ user }) => {
+  console.log("user id", user.id);
   const [skills, setSkills] = useState([]);
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    data.skills = skills;
+    const rawData = Object.fromEntries(formData.entries());
+
+    // Construct the payload cleanly
+    const data = {
+      name: rawData.name,
+      image: rawData.image,
+      hourlyRate: rawData.hourlyRate ? Number(rawData.hourlyRate) : 0, // Ensure it's a number
+      bio: rawData.bio,
+      skills: skills, // Injected from state safely
+    };
+
+    console.log("Cleaned Payload sending to backend:", data);
+
     const token = await getToken();
     const res = await freelancerPatch(user.id, data, token);
+
     if (res.success) {
       alert("Profile updated successfully!");
+      window.location.reload();
     } else {
-      alert("Something went wrong!");
+      alert(`Something went wrong: ${res.error || "Unknown Error"}`);
     }
   };
 
@@ -234,14 +249,14 @@ const EditProfileSection = ({ user }) => {
       <Form className="w-full max-w-96 mt-5" onSubmit={onSubmit}>
         <Fieldset>
           <FieldGroup>
-            <TextField name="name">
+            <TextField name="name" defaultValue={user?.name}>
               <Label>Name</Label>
-              <Input placeholder={user?.name} />
+              <Input />
               <FieldError />
             </TextField>
-            <TextField name="image">
+            <TextField name="image" defaultValue={user?.image}>
               <Label>Image Link</Label>
-              <Input placeholder={user?.image} />
+              <Input />
               <FieldError />
             </TextField>
             <Select
@@ -266,14 +281,18 @@ const EditProfileSection = ({ user }) => {
                 <ListBox>{selectOptions}</ListBox>
               </Select.Popover>
             </Select>
-            <TextField name="hourlyRate" type="number">
+            <TextField
+              name="hourlyRate"
+              type="number"
+              defaultValue={user?.hourlyRate}
+            >
               <Label>Hourly Rate</Label>
-              <Input placeholder={user?.hourlyRate} />
+              <Input />
               <FieldError />
             </TextField>
-            <TextField name="bio">
+            <TextField name="bio" defaultValue={user?.bio}>
               <Label>Bio</Label>
-              <TextArea placeholder={user?.bio} />
+              <TextArea />
             </TextField>
           </FieldGroup>
           <Fieldset.Actions>

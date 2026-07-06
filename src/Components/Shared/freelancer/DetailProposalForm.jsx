@@ -19,9 +19,13 @@ import {
   TextArea,
   TextField,
   DateField,
+  Modal,
 } from "@heroui/react";
+import { Rocket } from "lucide-react";
+import { GoFileSubmodule } from "react-icons/go";
 
 const DetailProposalForm = ({ data: current }) => {
+  const variant = "blur";
   const { data: session } = authClient.useSession();
 
   const onSubmit = async (e) => {
@@ -61,6 +65,7 @@ const DetailProposalForm = ({ data: current }) => {
       }
     }
   };
+
   return (
     <div className="p-4">
       {" "}
@@ -86,10 +91,42 @@ const DetailProposalForm = ({ data: current }) => {
             </TextField>
           </FieldGroup>
           <Fieldset.Actions>
-            <Button type="submit" className="w-full">
-              <FloppyDisk />
-              Submit Proposal
-            </Button>
+            <Modal key={variant}>
+              <Button variant="secondary" className="w-full">
+                <GoFileSubmodule className="mr-2" /> Submit Proposal
+              </Button>
+
+              <Modal.Backdrop variant={variant}>
+                <Modal.Container>
+                  <Modal.Dialog className="sm:max-w-[360px]">
+                    <Modal.CloseTrigger />
+                    <Modal.Header>
+                      <Modal.Icon className="bg-default text-foreground">
+                        <Rocket className="size-5" />
+                      </Modal.Icon>
+                      <Modal.Heading>
+                        Submit Proposal Confirmation
+                      </Modal.Heading>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>Are you sure you want to submit this proposal?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        onPress={() =>
+                          document.getElementById("proposal-submit").click()
+                        }
+                        className="w-full"
+                        slot="close"
+                      >
+                        Submit Proposal
+                      </Button>
+                    </Modal.Footer>
+                  </Modal.Dialog>
+                </Modal.Container>
+              </Modal.Backdrop>
+            </Modal>
+            <Button id="proposal-submit" type="submit" className="hidden" />
           </Fieldset.Actions>
         </Fieldset>
       </Form>

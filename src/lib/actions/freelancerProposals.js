@@ -64,16 +64,16 @@ export const getProposals = async (mail, token) => {
   return res.json();
 };
 
-export const freelancerPatch = async (freelancerId, updatedData, token) => {
+export const freelancerPatch = async (freelancerId, updateData, token) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/user/${freelancerId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/update/${freelancerId}`,
     {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(updateData),
     },
   );
   return res.json();
