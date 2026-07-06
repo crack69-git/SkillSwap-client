@@ -21,6 +21,15 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
   },
+  hooks: {
+    signIn: {
+      before: async (user) => {
+        if (user.userState === "blocked") {
+          throw new Error("Your account has been blocked.");
+        }
+      },
+    },
+  },
   databaseHooks: {
     user: {
       create: {

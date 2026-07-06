@@ -1,6 +1,6 @@
 "use client";
 import { deleteTask, patchTask } from "@/lib/actions/admin";
-import { Button, Table } from "@heroui/react";
+import { Button, Modal, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -35,20 +35,76 @@ const TaskCardSectionAdmin = ({ task, token }) => {
       <Table.Cell>{task.state}</Table.Cell>
       <Table.Cell>${task.budget}</Table.Cell>
       <Table.Cell>
-        <Button
-          size="sm"
-          variant="light"
-          onClick={() => handleAcceptRequest(task._id, task.state)}
-        >
-          {task.state === "pending" ? "Accept Request" : "Request Accepted"}
-        </Button>
-        <Button
-          size="sm"
-          variant="light"
-          onClick={() => handleDeleteRequest(task._id)}
-        >
-          Delete Post
-        </Button>
+        <div className="flex flex-col items-center justify-center gap-2">
+          {task.state === "pending" ? (
+            <Modal disabled>
+              <Button variant="secondary" disabled>
+                Accept Request
+              </Button>
+              <Modal.Backdrop>
+                <Modal.Container>
+                  <Modal.Dialog className="sm:max-w-[360px]">
+                    <Modal.CloseTrigger />
+                    <Modal.Header>
+                      <Modal.Icon className="bg-default text-foreground"></Modal.Icon>
+                      <Modal.Heading>Accept Task</Modal.Heading>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>
+                        Are you sure you want to accept this task request? This
+                        action cannot be undone.
+                      </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        size="sm"
+                        variant="Secondary"
+                        disabled={task.state === "accepted"}
+                        onClick={() =>
+                          handleAcceptRequest(task._id, task.state)
+                        }
+                      >
+                        Accept Request
+                      </Button>
+                    </Modal.Footer>
+                  </Modal.Dialog>
+                </Modal.Container>
+              </Modal.Backdrop>
+            </Modal>
+          ) : (
+            <p className="text-green-500 w-fit px-4 rounded-4xl py-3 ">
+              Accepted
+            </p>
+          )}
+          <Modal>
+            <Button variant="danger">Delete Task</Button>
+            <Modal.Backdrop>
+              <Modal.Container>
+                <Modal.Dialog className="sm:max-w-[360px]">
+                  <Modal.CloseTrigger />
+                  <Modal.Header>
+                    <Modal.Heading>Delete Task</Modal.Heading>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>
+                      Are you sure you want to delete this task? This action
+                      cannot be undone.
+                    </p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      onClick={() => handleDeleteRequest(task._id)}
+                    >
+                      Delete Post
+                    </Button>
+                  </Modal.Footer>
+                </Modal.Dialog>
+              </Modal.Container>
+            </Modal.Backdrop>
+          </Modal>
+        </div>
       </Table.Cell>
     </Table.Row>
   );

@@ -6,7 +6,7 @@ const FreelancerActiveProposal = async ({ proposal }) => {
   return (
     <div>
       <Card
-        className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4"
+        className="border bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg p-4 h-full"
         variant="default"
       >
         <Card.Header>

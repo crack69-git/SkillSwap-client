@@ -1,7 +1,8 @@
 "use client";
 import { patchUser } from "@/lib/actions/admin";
 import { getToken } from "@/lib/actions/tokenGet";
-import { Button, Table } from "@heroui/react";
+import { Button, Modal, Table } from "@heroui/react";
+import { Rocket } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -26,12 +27,51 @@ const ManageUsers = ({ user }) => {
       <Table.Cell>{user.email}</Table.Cell>
       <Table.Cell>
         {user.role !== "admin" && (
-          <Button
-            size="sm"
-            onClick={() => handleUserStateChange(user._id, user.userState)}
-          >
-            {user.userState === "unblocked" ? "Block User" : "Unblock User"}
-          </Button>
+          <Modal>
+            <Button variant="secondary">
+              {user.userState === "unblocked" ? "Block User" : "Unblock User"}
+            </Button>
+            <Modal.Backdrop>
+              <Modal.Container>
+                <Modal.Dialog className="sm:max-w-[360px]">
+                  <Modal.CloseTrigger />
+                  <Modal.Header>
+                    <Modal.Icon className="bg-default text-foreground">
+                      <Rocket className="size-5" />
+                    </Modal.Icon>
+                    <Modal.Heading>
+                      {" "}
+                      {user.userState === "unblocked"
+                        ? "Block"
+                        : "Unblock"}{" "}
+                      User
+                    </Modal.Heading>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p>
+                      Currently, this user is {user.userState}. Are you sure you
+                      want to{" "}
+                      {user.userState === "unblocked" ? "block" : "unblock"}{" "}
+                      this user?
+                    </p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      size="sm"
+                      type="close"
+                      onClick={() =>
+                        handleUserStateChange(user._id, user.userState)
+                      }
+                    >
+                      {user.userState === "unblocked"
+                        ? "Block User"
+                        : "Unblock User"}
+                    </Button>
+                  </Modal.Footer>
+                </Modal.Dialog>
+              </Modal.Container>
+            </Modal.Backdrop>
+          </Modal>
         )}
       </Table.Cell>
     </Table.Row>

@@ -1,4 +1,5 @@
 "use client";
+import { getAllUsers } from "@/lib/actions/admin";
 import { authClient } from "@/lib/auth-client";
 import {
   Button,
@@ -20,13 +21,17 @@ const page = () => {
     const formData = new FormData(e.currentTarget);
     const formValue = Object.fromEntries(formData.entries());
     console.log(formValue);
+
     const { data: res, error } = await authClient.signIn.email({
       email: formValue.email, // required
       password: formValue.password, // required
       rememberMe: true,
       // callbackURL: "/",
     });
-    // console.log("Login response:", res.user);
+    if (error) {
+      alert(error.message);
+      return;
+    }
     if (res) {
       if (res?.user?.userState === "blocked") {
         alert("Your account is blocked. Please contact support.");

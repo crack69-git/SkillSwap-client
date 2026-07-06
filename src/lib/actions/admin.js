@@ -13,7 +13,7 @@ export const getAllUsers = async (token) => {
 
 export const patchUser = async (userId, userData, token) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/user/${userId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/update/${userId}`,
     {
       method: "PATCH",
       headers: {
