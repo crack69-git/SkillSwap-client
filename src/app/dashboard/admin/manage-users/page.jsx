@@ -5,8 +5,8 @@ import { Button, Table } from "@heroui/react";
 import React from "react";
 
 const page = async () => {
-  // const token = await getToken();
-  const users = await getAllUsers();
+  const token = await getToken();
+  const users = await getAllUsers(token);
 
   return (
     <div className="w-11/12 mx-auto my-5">

@@ -1,10 +1,10 @@
 "use server";
-export const getAllUsers = async () => {
+export const getAllUsers = async (token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`,
     },
   });
   const users = await res.json();
