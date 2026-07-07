@@ -101,3 +101,17 @@ export const getSumOfPayments = async (freelancerEmail, token) => {
   );
   return res.json();
 };
+
+// return top freelancers
+export const getTopFreelancers = async (token) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/freelancer/top`,
+    {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  return res.json();
+};

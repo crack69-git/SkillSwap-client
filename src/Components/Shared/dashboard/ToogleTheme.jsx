@@ -7,7 +7,7 @@ import React from "react";
 
 const ToggleTheme = () => {
   const { theme, setTheme } = useTheme();
-  console.log("Current theme:", theme); // Debugging line to check the current theme
+
   const icons = {
     darkMode: {
       off: Moon,

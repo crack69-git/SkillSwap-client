@@ -18,7 +18,7 @@ export default async function Home() {
               Get your tasks done by<br></br>
               <span className="text-blue-600"> skilled freelancers</span>
             </p>
-            <p className="text-lg font-medium text-gray-700 mb-10">
+            <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-10">
               Connect with expert talent for high-performance projects. From
               software development to creative design, SkillSwap empowers your
               workflow with professional precision.

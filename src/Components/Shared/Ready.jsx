@@ -5,7 +5,7 @@ import { RiCustomerService2Line } from "react-icons/ri";
 
 const Ready = () => {
   return (
-    <div className="w-11/12 mx-auto mb-10 bg-[#8B5CF6] text-white rounded-3xl py-20 px-10 flex items-center justify-between gap-10">
+    <div className="w-11/12 mx-auto mb-10 bg-sky-900 text-white rounded-3xl py-20 px-10 flex items-center justify-between gap-10">
       <div>
         <p className="text-5xl font-bold mb-4">
           Ready to transform<br></br> your workflow?
