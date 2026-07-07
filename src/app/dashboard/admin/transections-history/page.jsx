@@ -1,13 +1,21 @@
 import TransactionHistory from "@/Components/Shared/admin/TransactionHistory";
 import { getAllPayments } from "@/lib/actions/payments";
 import { getToken } from "@/lib/actions/tokenGet";
+import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const page = async () => {
   const token = await getToken();
   const payments = await getAllPayments(token);
-
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session?.user?.role !== "admin") {
+    redirect("/unauthorize");
+  }
   return (
     <div className="w-11/12 mx-auto my-5">
       <h1 className="mb-5 text-3xl font-bold">Transaction History</h1>

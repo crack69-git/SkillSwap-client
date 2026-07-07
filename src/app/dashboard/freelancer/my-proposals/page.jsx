@@ -5,10 +5,17 @@ import { headers } from "next/headers";
 import React from "react";
 import MyProposalTable from "@/Components/Shared/admin/MyProposalTable";
 import { getToken } from "@/lib/actions/tokenGet";
+import { redirect } from "next/navigation";
 const MyProposalPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  if (session?.user?.role !== "freelancer") {
+    redirect("/unauthorize");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
 
   const email = session?.user?.email;
 

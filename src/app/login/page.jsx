@@ -28,20 +28,6 @@ const page = () => {
     });
 
     if (res) {
-      if (res?.user?.userState === "blocked") {
-        toast.error("Your account is blocked. Please contact support.", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-        return;
-      }
       toast.success("Login successful!", {
         position: "top-center",
         autoClose: 1000,

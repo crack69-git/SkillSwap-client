@@ -2,6 +2,7 @@ import PostATask from "@/Components/Shared/dashboard/PostATask";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import { FaHome } from "react-icons/fa";
 import { LuShieldAlert } from "react-icons/lu";
@@ -10,7 +11,12 @@ const PostATaskPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
+  if (session?.user?.role !== "client") {
+    redirect("/unauthorize");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
   return (
     <div className="w-11/12 mx-auto py-5">
       {session.user.role === "client" ? (

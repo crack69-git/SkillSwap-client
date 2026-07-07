@@ -1,11 +1,18 @@
 import EditProfileSection from "@/Components/Shared/freelancer/EditProfileSection";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 const ProfileEditPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  if (session?.user?.role !== "freelancer") {
+    redirect("/unauthorize");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
 
   return (
     <div className="w-11/12 mx-auto my-5">

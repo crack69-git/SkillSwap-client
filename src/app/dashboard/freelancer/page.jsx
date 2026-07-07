@@ -4,11 +4,18 @@ import { headers } from "next/headers";
 import React, { Suspense } from "react";
 import InfoTrace from "../InfoTrace";
 import { Spinner } from "@heroui/react";
+import { redirect } from "next/navigation";
 
 const FreelancerPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  if (session?.user?.role !== "freelancer") {
+    redirect("/unauthorize");
+  }
+  if (session?.user?.userState === "blocked") {
+    redirect("/access-blocked");
+  }
 
   return (
     <div>

@@ -4,12 +4,18 @@ import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
 import { Table } from "@heroui/react";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const ManagetasksPage = async () => {
   const token = await getToken();
   const tasks = await getTasks(token);
-
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session?.user?.role !== "admin") {
+    redirect("/unauthorize");
+  }
   return (
     <div className="w-11/12 mx-auto my-5">
       <h2 className="text-3xl font-bold">Manage Tasks</h2>

@@ -3,6 +3,7 @@ import InfoTrace from "../InfoTrace";
 import { Spinner } from "@heroui/react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const AdminPage = async () => {
   const session = await auth.api.getSession({
@@ -10,6 +11,9 @@ const AdminPage = async () => {
   });
 
   const user = session?.user;
+  if (user?.role !== "admin") {
+    redirect("/unauthorize");
+  }
   return (
     <div className="w-11/12 mx-auto my-5">
       <h2 className="text-3xl font-bold">Admin Dashboard</h2>

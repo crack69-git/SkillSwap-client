@@ -2,7 +2,10 @@ import OpenTask from "@/Components/Shared/freelancer/OpenTask";
 import PaginationComponent from "@/Components/Shared/PaginationComponent";
 import { getOpenTasks } from "@/lib/actions/freelancerProposals";
 import { getToken } from "@/lib/actions/tokenGet";
+import { auth } from "@/lib/auth";
 import { Input, Label, ListBox, Select } from "@heroui/react";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 import { RiFilter3Line } from "react-icons/ri";
 
@@ -214,6 +217,15 @@ const BrowseTasks = async ({ searchParams }) => {
       </ListBox.Item>
     </>
   );
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session?.user?.role !== "freelancer") {
+    redirect("/unauthorize");
+  }
+  if (session?.user?.userStatus === "blocked") {
+    redirect("/access-blocked");
+  }
   return (
     <div className="my-5 w-11/12 mx-auto">
       <h2 className="text-4xl font-bold mb-10">Browse Tasks</h2>
