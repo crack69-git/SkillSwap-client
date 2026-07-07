@@ -22,6 +22,7 @@ const InfoTrace = async ({ user }) => {
   const userProposals = await getProposals(user?.email, token);
   const Earning = await getSumOfPayments(user?.email, token);
   const revenue = await getAllRevenue(token);
+  console.log(revenue, "revenue");
 
   const client = (
     <>
@@ -118,7 +119,9 @@ const InfoTrace = async ({ user }) => {
           <VscCopilotSuccess />
           Total Revenue
         </p>
-        <p className="text-3xl font-bold text-center">${revenue?.total ?? 0}</p>
+        <p className="text-3xl font-bold text-center">
+          ${revenue?.totalEarning ?? 0}
+        </p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
