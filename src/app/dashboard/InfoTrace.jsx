@@ -3,6 +3,7 @@ import {
   getProposals,
   getSumOfPayments,
 } from "@/lib/actions/freelancerProposals";
+import { getAllRevenue } from "@/lib/actions/payments";
 import { getTasks } from "@/lib/actions/tasks";
 import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
@@ -20,6 +21,7 @@ const InfoTrace = async ({ user }) => {
   const res = await getTasks(token);
   const userProposals = await getProposals(user?.email, token);
   const Earning = await getSumOfPayments(user?.email, token);
+  const revenue = await getAllRevenue(token);
 
   const client = (
     <>
@@ -116,9 +118,7 @@ const InfoTrace = async ({ user }) => {
           <VscCopilotSuccess />
           Total Revenue
         </p>
-        <p className="text-3xl font-bold text-center">
-          {res.filter((task) => task.status === "Completed").length}
-        </p>
+        <p className="text-3xl font-bold text-center">${revenue?.total ?? 0}</p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">

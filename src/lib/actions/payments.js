@@ -1,5 +1,19 @@
 "use server";
 
+export const getAllRevenue = async (token) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/payments/total-earning`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  const revenue = await res.json();
+  return revenue;
+};
 export const createPayment = async (paymentData, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/payments`, {
     method: "POST",
