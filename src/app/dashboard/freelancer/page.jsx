@@ -5,6 +5,7 @@ import React, { Suspense } from "react";
 import InfoTrace from "../InfoTrace";
 import { Spinner } from "@heroui/react";
 import { redirect } from "next/navigation";
+import ProfileSection from "@/Components/Shared/freelancer/ProfileSection";
 
 const FreelancerPage = async () => {
   const session = await auth.api.getSession({
@@ -16,7 +17,7 @@ const FreelancerPage = async () => {
   if (session?.user?.userState === "blocked") {
     redirect("/access-blocked");
   }
-
+  const user = session?.user;
   return (
     <div>
       <div className="w-11/12 mx-auto mt-5">
@@ -33,6 +34,7 @@ const FreelancerPage = async () => {
           }
         >
           <InfoTrace />
+          <ProfileSection user={user} />
         </Suspense>
       </div>
     </div>

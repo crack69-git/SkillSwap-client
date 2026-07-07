@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Name: SkillSwap
 
-## Getting Started
+## Purpose:
 
-First, run the development server:
+SkillSwap is a full-stack freelance marketplace that connects clients with talented freelancers. Clients can post projects, review freelancer proposals, hire suitable candidates, and manage project progress. Freelancers can create professional profiles, browse available jobs, submit proposals, and receive payments upon successful project completion. The platform includes secure authentication, role-based access control, project management, proposal tracking, ratings and reviews, payment integration, and an admin dashboard for managing users and platform activities. SkillSwap aims to provide a seamless, transparent, and secure environment for both clients and freelancers.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Live website link: https://skill-swap-client-six.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## key features:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1.Secure authentication (Email/Password & Google OAuth).
+2.Role-based access (Client, Freelancer, Admin).
+3.Project posting and management.
+4.Proposal submission and tracking.
+5.Freelancer profile management.
+6.Hire and contract workflow.
+7.Secure payment processing.
+8.Admin dashboard for user and project moderation.
+9.Responsive and modern user interface.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Npm Packages:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js, React, HeroUI, Tailwind CSS, Better Auth, MongoDB Atlas, Stripe, Framer Motion, React Toastify, Next Themes, React Icons, Lucide React, Gravity UI Icons, ESLint, Express, Cors, Jose-cjs.
