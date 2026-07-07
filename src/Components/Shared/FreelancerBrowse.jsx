@@ -2,7 +2,6 @@ import { Card, Separator } from "@heroui/react";
 import React from "react";
 
 const FreelancerBrowse = ({ data }) => {
-  // console.log("data:", data);
   return (
     <div>
       {" "}

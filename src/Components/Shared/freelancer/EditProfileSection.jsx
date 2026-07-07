@@ -19,7 +19,6 @@ import { getToken } from "@/lib/actions/tokenGet";
 import { FaSave, FaUndo } from "react-icons/fa";
 import { Bounce, toast } from "react-toastify";
 const EditProfileSection = ({ user }) => {
-  console.log("user id", user.id);
   const [skills, setSkills] = useState([]);
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -35,8 +34,6 @@ const EditProfileSection = ({ user }) => {
       bio: rawData.bio,
       skills: skills, // Injected from state safely
     };
-
-    console.log("Cleaned Payload sending to backend:", data);
 
     const token = await getToken();
     const res = await freelancerPatch(user.id, data, token);
@@ -288,7 +285,6 @@ const EditProfileSection = ({ user }) => {
               selectionMode="multiple"
               value={skills}
               onChange={(value) => {
-                console.log(value);
                 setSkills(Array.isArray(value) ? value : []);
               }}
             >

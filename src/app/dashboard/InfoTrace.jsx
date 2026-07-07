@@ -22,7 +22,6 @@ const InfoTrace = async ({ user }) => {
   const userProposals = await getProposals(user?.email, token);
   const Earning = await getSumOfPayments(user?.email, token);
   const revenue = await getAllRevenue(token);
-  console.log(revenue, "revenue");
 
   const client = (
     <>

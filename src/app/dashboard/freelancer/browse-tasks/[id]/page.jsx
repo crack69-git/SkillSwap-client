@@ -17,7 +17,6 @@ const DetailsPage = async ({ params }) => {
   const role = user?.user?.role;
 
   const data = await getSingleTask(id);
-  console.log(data, "data from details page");
 
   return (
     <div className="w-11/12 max-sm:grid-cols-1 mx-auto my-5 grid grid-cols-3 gap-4">

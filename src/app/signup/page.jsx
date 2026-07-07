@@ -23,7 +23,7 @@ const RegisterPage = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+
     const { data: res, error } = await authClient.signUp.email({
       name: data.name, // required
       email: data.email, // required

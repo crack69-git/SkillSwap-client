@@ -8,7 +8,7 @@ import React from "react";
 
 const ManageProposals = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
-  console.log("Session Data:", session);
+
   const userId = session?.user?.id;
   const token = await getToken(); // extract the token from the response
 

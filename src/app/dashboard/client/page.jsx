@@ -8,7 +8,6 @@ const ClientDashboard = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log("Session Data:", session);
   const user = session?.user;
   return (
     <div className="w-11/12 mx-auto mt-5">

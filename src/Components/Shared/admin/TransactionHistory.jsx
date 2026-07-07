@@ -2,7 +2,6 @@ import { Table } from "@heroui/react";
 import React from "react";
 
 const TransactionHistory = ({ payment }) => {
-  console.log("TransactionHistory payment:", payment);
   return (
     <Table.Row>
       <Table.Cell>{payment.clientEmail}</Table.Cell>

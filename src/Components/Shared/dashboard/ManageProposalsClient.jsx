@@ -4,9 +4,7 @@ import { Button, Table } from "@heroui/react";
 import React from "react";
 const ManageProposalsClient = ({ proposal }) => {
   const handleReject = async (proposalId, status) => {
-    // console.log("button pressed", proposalId, status);
     const res = await patchProposal(proposalId, { status: "rejected" });
-    console.log("Proposal rejected:", res);
   };
   const handleCheckout = async (proposalId) => {
     // // Implementation for handling checkout
@@ -23,7 +21,7 @@ const ManageProposalsClient = ({ proposal }) => {
       },
     );
     const data = await res.json();
-    console.log("data", data);
+
     window.location.href = data.url;
   };
 

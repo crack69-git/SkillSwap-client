@@ -8,8 +8,7 @@ import { Bounce, toast } from "react-toastify";
 const TaskCardSectionAdmin = ({ task, token }) => {
   const router = useRouter();
   const handleAcceptRequest = async (taskId, currentState) => {
-    console.log("Task ID:", taskId);
-    console.log("Current State:", currentState);
+  
     const newState = currentState === "pending" ? "accepted" : "pending";
     const res = await patchTask(taskId, { state: newState }, token);
     if (res.success) {

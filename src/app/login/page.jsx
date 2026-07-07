@@ -19,7 +19,6 @@ const page = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValue = Object.fromEntries(formData.entries());
-    console.log(formValue);
 
     const { data: res, error } = await authClient.signIn.email({
       email: formValue.email, // required
@@ -70,7 +69,6 @@ const page = () => {
     }
   };
   const handleGoogle = async () => {
-    console.log("button clicked");
     const data = await authClient.signIn.social({
       provider: "google",
     });

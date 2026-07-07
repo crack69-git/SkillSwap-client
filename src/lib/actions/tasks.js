@@ -44,7 +44,7 @@ export const getAllProposalById = async (id, token) => {
   if (!res.ok) {
     throw new Error("Failed to fetch proposals");
   }
-  console.log("Fetched Proposals:", res);
+
   return res.json();
 };
 

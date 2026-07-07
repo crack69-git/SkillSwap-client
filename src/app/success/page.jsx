@@ -20,12 +20,11 @@ export default async function Success({ searchParams }) {
 
   const { status, metadata, customer_details } = session;
   const customerEmail = customer_details?.email;
-  console.log("metadata", metadata);
 
   if (status === "open") {
     return redirect("/");
   }
-  console.log("Payment status:", customerEmail, status, metadata);
+
   if (status === "complete") {
     const paymentNow = {
       paymentIntentId: session.payment_intent.id,
