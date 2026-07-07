@@ -4,10 +4,8 @@ import { getToken } from "@/lib/actions/tokenGet";
 import { getTopFreelancers } from "@/lib/actions/freelancerProposals";
 
 const TopFreelancer = async () => {
-  const token = await getToken();
+  const data = await getTopFreelancers();
 
-  const data = await getTopFreelancers(token);
-  console.log(data);
   return (
     <div className="bg-gray-50 dark:bg-gray-900 py-10 text-center mb-10">
       <div className="w-11/12 mx-auto">
