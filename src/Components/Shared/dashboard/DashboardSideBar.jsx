@@ -9,8 +9,7 @@ const DashboardSideBar = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  // console.log("DashboardSideBar Session:", session);
-  const links = <></>;
+
   const clientlinks = (
     <>
       <div className="mt-4">

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import InfoTrace from "../InfoTrace";
+// import InfoTrace from "../InfoTrace";
 import { Spinner } from "@heroui/react";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -25,9 +25,7 @@ const AdminPage = async () => {
           </div>
         }
       >
-        <div className="mt-5">
-          <InfoTrace user={user} />
-        </div>
+        <div className="mt-5">{/* <InfoTrace user={user} /> */}</div>
       </Suspense>
     </div>
   );
