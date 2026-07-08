@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 const MyTaskPage = async () => {
   const token = await getToken(); // extract the token from the response
   const res = await getTasks(token);
-  console.log("res in MyTaskPage:", res);
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });

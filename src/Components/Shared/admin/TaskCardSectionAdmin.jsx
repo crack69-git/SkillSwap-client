@@ -8,7 +8,6 @@ import { Bounce, toast } from "react-toastify";
 const TaskCardSectionAdmin = ({ task, token }) => {
   const router = useRouter();
   const handleAcceptRequest = async (taskId, currentState) => {
-  
     const newState = currentState === "pending" ? "accepted" : "pending";
     const res = await patchTask(taskId, { state: newState }, token);
     if (res.success) {
@@ -99,7 +98,7 @@ const TaskCardSectionAdmin = ({ task, token }) => {
                     <Modal.Footer>
                       <Button
                         size="sm"
-                        variant="Secondary"
+                        variant="primary"
                         disabled={task.state === "accepted"}
                         onClick={() =>
                           handleAcceptRequest(task._id, task.state)

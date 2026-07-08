@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Card, CloseButton } from "@heroui/react";
 
 const MyTaskCardClient = async ({ tasks }) => {
-  console.log("tasks in MyTaskCardClient:", tasks);
   return (
     <Card className="w-full items-stretch md:flex-row border">
       <div className="flex flex-1 flex-col gap-3">
