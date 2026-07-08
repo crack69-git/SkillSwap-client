@@ -18,6 +18,7 @@ const FreelancerPage = async () => {
     redirect("/access-blocked");
   }
   const user = session?.user;
+  console.log("user in FreelancerPage:", user);
   return (
     <div>
       <div className="w-11/12 mx-auto mt-5">
@@ -33,7 +34,7 @@ const FreelancerPage = async () => {
             </div>
           }
         >
-          <InfoTrace />
+          <InfoTrace user={user} />
           <ProfileSection user={user} />
         </Suspense>
       </div>

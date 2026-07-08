@@ -62,7 +62,7 @@ const InfoTrace = async ({ user }) => {
       </div>
     </>
   );
-  const freelancer = (
+  const freelancers = (
     <>
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
@@ -139,7 +139,7 @@ const InfoTrace = async ({ user }) => {
       {user?.role === "client"
         ? client
         : user?.role === "freelancer"
-          ? freelancer
+          ? freelancers
           : admin}
     </div>
   );
