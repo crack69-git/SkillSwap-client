@@ -2,12 +2,19 @@ import React from "react";
 import { Button, Card, CloseButton } from "@heroui/react";
 
 const MyTaskCardClient = async ({ tasks }) => {
+  console.log("tasks in MyTaskCardClient:", tasks);
   return (
     <Card className="w-full items-stretch md:flex-row border">
       <div className="flex flex-1 flex-col gap-3">
         <Card.Header className="gap-1">
           <p
-            className={`w-fit px-4 rounded-4xl ${tasks.status === "Open" ? "bg-purple-200 dark:bg-purple-500" : tasks.status === "In Progress" ? "bg-yellow-200 dark:bg-yellow-500" : "bg-green-200 dark:bg-green-500"} mb-5`}
+            className={`w-fit px-4 rounded-4xl ${
+              tasks.status === "Open"
+                ? "bg-purple-200 dark:bg-purple-500"
+                : tasks.status === "In Progress"
+                  ? "bg-yellow-200 dark:bg-yellow-500"
+                  : "bg-green-200 dark:bg-green-500"
+            } mb-5`}
           >
             {tasks.status}
           </p>

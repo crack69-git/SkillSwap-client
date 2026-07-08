@@ -312,7 +312,7 @@ const PostATask = () => {
           <Fieldset.Actions>
             <Button type="submit">
               <FloppyDisk />
-              Save changes
+              Post
             </Button>
             <Button type="reset" variant="secondary">
               Cancel
