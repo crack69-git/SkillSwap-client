@@ -7,23 +7,30 @@ import { authClient } from "@/lib/auth-client";
 
 import { Button, Drawer, Separator, Spinner } from "@heroui/react";
 import ToogleTheme from "./dashboard/ToogleTheme";
-import { IoMenu } from "react-icons/io5";
+import { IoHome, IoMenu } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
 import { redirect } from "next/navigation";
+import { TbBrowser, TbUser } from "react-icons/tb";
+import NavLink from "./NavLink";
 
 const NavbarUser = () => {
   const { data, isPending } = authClient.useSession();
 
   const links = (
     <>
-      <Link href="/browse-tasks">
-        <p className="hover:border-b-2 hover:border-blue-500">Browse Tasks</p>
-      </Link>
-      <Link href="/browse-freelancer">
-        <p className="hover:border-b-2 hover:border-blue-500">
-          Browse Freelancers
-        </p>
-      </Link>
+      <NavLink href="/">
+        <IoHome />
+        Home
+      </NavLink>
+      <NavLink href="/browse-tasks">
+        <TbBrowser />
+        Browse Tasks
+      </NavLink>
+
+      <NavLink href="/browse-freelancer">
+        <TbUser />
+        Browse Freelancers
+      </NavLink>
     </>
   );
   return (
@@ -71,7 +78,7 @@ const NavbarUser = () => {
           ) : data?.user ? (
             <div className="flex flex-wrap max-sm:justify-center items-center gap-4">
               <Button variant="flat">
-                <Link
+                <NavLink
                   href={
                     data.user.role === "client"
                       ? "/dashboard/client"
@@ -81,7 +88,7 @@ const NavbarUser = () => {
                   }
                 >
                   Dashboard
-                </Link>
+                </NavLink>
               </Button>
 
               <Separator orientation="vertical" className="h-6" />

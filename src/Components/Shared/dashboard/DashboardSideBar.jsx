@@ -4,6 +4,7 @@ import { HiBars3BottomLeft } from "react-icons/hi2";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import NavLink from "../NavLink";
 
 const DashboardSideBar = async () => {
   const session = await auth.api.getSession({
@@ -15,82 +16,54 @@ const DashboardSideBar = async () => {
       <div className="mt-4">
         {session?.user?.role === "client" ? (
           <ul>
-            <Link href="/dashboard/client">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Home
-              </li>
-            </Link>
-            <Link href="/dashboard/client/post-task">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Post a Task
-              </li>
-            </Link>
-            <Link href="/dashboard/client/my-tasks">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                My Tasks
-              </li>
-            </Link>
-            <Link href="/dashboard/client/manage-proposals">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Manage Proposals
-              </li>
-            </Link>
+            <NavLink href="/dashboard/client">
+              <li>Home</li>
+            </NavLink>
+            <NavLink href="/dashboard/client/post-task">
+              <li>Post a Task</li>
+            </NavLink>
+            <NavLink href="/dashboard/client/my-tasks">
+              <li>My Tasks</li>
+            </NavLink>
+            <NavLink href="/dashboard/client/manage-proposals">
+              <li>Manage Proposals</li>
+            </NavLink>
           </ul>
         ) : session?.user?.role === "freelancer" ? (
           <ul>
-            <Link href="/dashboard/freelancer">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Home
-              </li>
-            </Link>
-            <Link href="/dashboard/freelancer/browse-tasks">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Browse Tasks
-              </li>
-            </Link>
-            <Link href="/dashboard/freelancer/my-proposals">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                My Proposals
-              </li>
-            </Link>
-            <Link href="/dashboard/freelancer/active-projects">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Active Projects
-              </li>
-            </Link>
-            <Link href="/dashboard/freelancer/my-earnings">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                My Earnings
-              </li>
-            </Link>
-            <Link href="/dashboard/freelancer/edit-profile">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Edit Profile
-              </li>
-            </Link>
+            <NavLink href="/dashboard/freelancer">
+              <li>Home</li>
+            </NavLink>
+            <NavLink href="/dashboard/freelancer/browse-tasks">
+              <li>Browse Tasks</li>
+            </NavLink>
+            <NavLink href="/dashboard/freelancer/my-proposals">
+              <li>My Proposals</li>
+            </NavLink>
+            <NavLink href="/dashboard/freelancer/active-projects">
+              <li>Active Projects</li>
+            </NavLink>
+            <NavLink href="/dashboard/freelancer/my-earnings">
+              <li>My Earnings</li>
+            </NavLink>
+            <NavLink href="/dashboard/freelancer/edit-profile">
+              <li>Edit Profile</li>
+            </NavLink>
           </ul>
         ) : (
           <ul>
-            <Link href="/dashboard/admin">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Home{" "}
-              </li>
-            </Link>
-            <Link href="/dashboard/admin/manage-users">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Manage Users{" "}
-              </li>
-            </Link>
-            <Link href="/dashboard/admin/manage-tasks">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Manage Tasks{" "}
-              </li>
-            </Link>
-            <Link href="/dashboard/admin/transections-history">
-              <li className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800">
-                Transaction History{" "}
-              </li>
-            </Link>
+            <NavLink href="/dashboard/admin">
+              <li>Home </li>
+            </NavLink>
+            <NavLink href="/dashboard/admin/manage-users">
+              <li>Manage Users </li>
+            </NavLink>
+            <NavLink href="/dashboard/admin/manage-tasks">
+              <li>Manage Tasks </li>
+            </NavLink>
+            <NavLink href="/dashboard/admin/transections-history">
+              <li>Transaction History </li>
+            </NavLink>
           </ul>
         )}
       </div>

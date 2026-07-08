@@ -279,6 +279,7 @@ const EditProfileSection = ({ user }) => {
               <FieldError />
             </TextField>
             <Select
+              isRequired
               name="skills"
               className="w-96"
               placeholder="Select skills"

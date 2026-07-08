@@ -5,7 +5,7 @@ import React from "react";
 const ProfileSection = ({ user }) => {
   return (
     <div>
-      <Card className="w-full items-stretch md:flex-row mt-5">
+      <Card className="w-full items-stretch md:flex-row mt-5 border">
         <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
           <Image
             alt="Cherries"
@@ -17,15 +17,19 @@ const ProfileSection = ({ user }) => {
         </div>
         <div className="flex flex-1 flex-col gap-3">
           <Card.Header className="gap-1">
-            <Card.Title className="pr-8">{user.name}</Card.Title>
-            <Card.Description>{user.email}</Card.Description>
+            <Card.Title className="pr-8 text-xl font-bold">
+              {user.name}
+            </Card.Title>
+            <Card.Description className="text-[16px]">
+              {user.email}
+            </Card.Description>
           </Card.Header>
           <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-col">
-              <span className="text-sm  text-foreground">
+              <span className=" text-foreground">
                 Hourly Rate: {user.hourlyRate || "Not specified"}
               </span>
-              <span className="text-xs text-muted">
+              <span className=" text-muted">
                 {user.skills && user.skills.length > 0
                   ? `Skills: ${user.skills.join(", ")}`
                   : "Skills: Not specified"}
