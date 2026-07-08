@@ -4,8 +4,19 @@ import PaginationComponent from "@/Components/Shared/PaginationComponent";
 // import PaginationComponent from "@/Components/Shared/PaginationComponent";
 import { getOpenTasks } from "@/lib/actions/freelancerProposals";
 import { auth } from "@/lib/auth";
-import { Input, Label, ListBox, Select } from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  Input,
+  Label,
+  ListBox,
+  Select,
+} from "@heroui/react";
 import { headers } from "next/headers";
+import { BiTaskX } from "react-icons/bi";
+import { FaInbox, FaPlus } from "react-icons/fa";
 
 import { RiFilter3Line } from "react-icons/ri";
 
@@ -268,9 +279,35 @@ const page = async ({ searchParams }) => {
 
         {/* Cards Display Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-          {tasks.map((task) => (
-            <OpenTask key={task._id} task={task} />
-          ))}
+          {tasks.length > 0 ? (
+            tasks.map((task) => <OpenTask key={task._id} task={task} />)
+          ) : (
+            <div className="col-span-3  mt-10">
+              <Card className="p-4 mx-auto shadow-md border border-default-200">
+                {/* Optional Header */}
+
+                {/* Custom div replacing CardBody */}
+                <div className="flex flex-col items-center justify-center text-center py-6 px-4">
+                  <h3 className="flex flex-col items-center justify-center text-lg font-semibold text-foreground">
+                    <BiTaskX className="text-3xl" />
+                    No Tasks Found
+                  </h3>
+                  <p className="text-sm text-default-500 mt-1 max-w-sm">
+                    Please check back later, Post a Task or adjust your filters
+                    to view ongoing projects.
+                  </p>
+                </div>
+
+                {/* Optional Action Footer */}
+                <CardFooter className="justify-center pb-4">
+                  <Button variant="primary" size="sm">
+                    <FaPlus />
+                    Post a Task
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          )}
         </div>
 
         {/* Pagination Navigation Interface */}

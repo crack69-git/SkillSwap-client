@@ -1,18 +1,18 @@
 import { Button, Card, CloseButton } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
-
+import heroImg from "@/assests/hero_img.webp";
 const ProfileSection = ({ user }) => {
   return (
     <div>
       <Card className="w-full items-stretch md:flex-row mt-5 border">
         <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
           <Image
-            alt="Cherries"
+            alt="user profile image"
             fill
             className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover select-none"
             loading="lazy"
-            src={user.image}
+            src={user.image || heroImg}
           />
         </div>
         <div className="flex flex-1 flex-col gap-3">
@@ -29,8 +29,8 @@ const ProfileSection = ({ user }) => {
               <span className=" text-foreground">
                 Hourly Rate: {user.hourlyRate || "Not specified"}
               </span>
-              <span className=" text-muted">
-                {user.skills && user.skills.length > 0
+              <span className="text-muted">
+                {user.skills.length > 1
                   ? `Skills: ${user.skills.join(", ")}`
                   : "Skills: Not specified"}
               </span>

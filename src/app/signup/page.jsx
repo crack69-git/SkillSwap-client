@@ -23,6 +23,7 @@ const RegisterPage = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
+    console.log(data);
 
     const { data: res, error } = await authClient.signUp.email({
       name: data.name, // required
@@ -34,7 +35,6 @@ const RegisterPage = () => {
       hourlyRate: 0,
       skills: [""],
       userState: "unblocked",
-      callbackURL: "/",
     });
     if (res) {
       toast.success("Sign up successful!", {

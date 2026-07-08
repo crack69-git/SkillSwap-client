@@ -15,6 +15,7 @@ import { RiProgress6Line } from "react-icons/ri";
 import { VscCopilotSuccess } from "react-icons/vsc";
 
 const InfoTrace = async ({ user }) => {
+  console.log("user in InfoTrace:", user);
   const userId = user?.id;
   const token = await getToken(); // extract the token from the response
   const users = await getAllUsers(token);

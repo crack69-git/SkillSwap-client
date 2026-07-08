@@ -21,15 +21,7 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
   },
-  hooks: {
-    signIn: {
-      before: async (user) => {
-        if (user.userState === "blocked") {
-          throw new Error("Your account has been blocked.");
-        }
-      },
-    },
-  },
+
   databaseHooks: {
     user: {
       create: {
@@ -37,7 +29,8 @@ export const auth = betterAuth({
           return {
             data: {
               ...user,
-              role: "client",
+              // Fallback to "client" ONLY if no role was provided in the signup data
+              role: user.role || "client",
               userState: "unblocked",
             },
           };

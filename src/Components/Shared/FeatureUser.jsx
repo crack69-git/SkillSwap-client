@@ -5,6 +5,8 @@ import { getOpenTasks } from "@/lib/actions/freelancerProposals";
 import OpenTask from "./freelancer/OpenTask";
 import { getFeatureTasks } from "@/lib/actions/tasks";
 import Link from "next/link";
+import { Button } from "@heroui/react";
+import { FaPlus } from "react-icons/fa";
 
 const FeatureUser = async () => {
   const data = await getFeatureTasks();
@@ -24,9 +26,22 @@ const FeatureUser = async () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-        {data.map((task) => (
-          <OpenTask key={task._id} task={task} />
-        ))}
+        {data.length > 0 ? (
+          data.map((task) => <OpenTask key={task._id} task={task} />)
+        ) : (
+          <div className="text-gray-500 text-center col-span-full flex flex-col items-center justify-center my-10">
+            <p>No feature tasks available at the moment.</p>
+            <Link
+              href="/dashboard/client/post-task"
+              className="flex items-center gap-2"
+            >
+              <Button variant="primary" size="small" className="ml-2 mt-3">
+                <FaPlus />
+                Post a Task
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

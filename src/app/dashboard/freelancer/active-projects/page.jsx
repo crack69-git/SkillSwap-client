@@ -26,9 +26,13 @@ const page = async () => {
       <h1 className="text-3xl font-bold">Active Projects Page</h1>
 
       <div className="mt-5 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-4 h-full">
-        {data?.map((proposal) => (
-          <FreelancerActiveProposal key={proposal._id} proposal={proposal} />
-        ))}
+        {data && data.length > 0 ? (
+          data.map((proposal) => (
+            <FreelancerActiveProposal key={proposal._id} proposal={proposal} />
+          ))
+        ) : (
+          <p>No active projects found.</p>
+        )}
       </div>
     </div>
   );

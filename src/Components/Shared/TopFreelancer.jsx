@@ -15,9 +15,15 @@ const TopFreelancer = async () => {
           complex high-end deliverables.
         </p>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {data.map((freelancer) => (
-            <TopFreelancerCard key={freelancer._id} freelancer={freelancer} />
-          ))}
+          {data.length > 0 ? (
+            data.map((freelancer) => (
+              <TopFreelancerCard key={freelancer._id} freelancer={freelancer} />
+            ))
+          ) : (
+            <p className="text-gray-700 dark:text-gray-300 text-center col-span-full">
+              No top freelancers available at the moment.
+            </p>
+          )}
         </div>
       </div>
     </div>

@@ -95,7 +95,7 @@ const page = () => {
           isRequired
           name="email"
           type="email"
-          defaultValue="admin1@taskhive.com"
+          defaultValue="admin@taskhive.com"
           validate={(value) => {
             if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
               return "Please enter a valid email address";
@@ -112,7 +112,7 @@ const page = () => {
           minLength={8}
           name="password"
           type="password"
-          defaultValue="admin1@taskhive.com"
+          defaultValue="12345678"
         >
           <Label>Password</Label>
           <Input placeholder="Enter your password" />

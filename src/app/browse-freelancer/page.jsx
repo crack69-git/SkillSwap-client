@@ -1,7 +1,17 @@
 import FreelancerBrowse from "@/Components/Shared/FreelancerBrowse";
 import { getFreelancer } from "@/lib/actions/tasks";
-import { Input, Label, ListBox, Select } from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  Input,
+  Label,
+  ListBox,
+  Select,
+} from "@heroui/react";
 import React from "react";
+import { FaUserSlash } from "react-icons/fa";
 import { RiFilter3Line } from "react-icons/ri";
 
 const page = async ({ searchParams }) => {
@@ -250,7 +260,24 @@ const page = async ({ searchParams }) => {
           ))}
         </div>
       ) : (
-        <p>No freelancers available</p>
+        <div className="w-full max-w-md mx-auto mt-8">
+          <Card className="p-4 shadow-md border border-default-200">
+            {/* Optional Header Icon */}
+
+            {/* Custom div replacing CardBody */}
+            <div className="flex flex-col items-center justify-center text-center py-6 px-4">
+              <h3 className="text-lg font-semibold text-foreground">
+                No Freelancers Available
+              </h3>
+              <p className="text-sm text-default-500 mt-1 max-w-sm">
+                There are currently no talents matching your criteria. Try
+                loosening your search filters or checking back soon.
+              </p>
+            </div>
+
+            {/* Optional Reset/Action Footer */}
+          </Card>
+        </div>
       )}
     </div>
   );
