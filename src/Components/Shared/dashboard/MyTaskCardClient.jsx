@@ -1,5 +1,7 @@
 import React from "react";
 import { Button, Card, CloseButton } from "@heroui/react";
+import EditClientTask from "../EditClientTask";
+import DeleteTask from "../DeleteTask";
 
 const MyTaskCardClient = async ({ tasks }) => {
   return (
@@ -17,6 +19,9 @@ const MyTaskCardClient = async ({ tasks }) => {
           >
             {tasks.status}
           </p>
+          <p className="bg-gray-200 dark:bg-gray-600 w-fit px-3 rounded-3xl">
+            {tasks.state}
+          </p>
           <Card.Title className="pr-8 text-xl font-bold">
             {tasks.TaskTitle}
           </Card.Title>
@@ -32,16 +37,8 @@ const MyTaskCardClient = async ({ tasks }) => {
             </span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Button variant="outline" size="sm">
-              Edit Task
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              className="ml-2 bg-red-500 hover:bg-red-600"
-            >
-              Delete Task
-            </Button>
+            <EditClientTask tasks={tasks} />
+            <DeleteTask tasks={tasks} />
           </div>
         </Card.Footer>
       </div>

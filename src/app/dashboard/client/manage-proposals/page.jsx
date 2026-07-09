@@ -13,7 +13,7 @@ const ManageProposals = async () => {
   });
 
   const userId = session?.user?.id;
-  const token = await getToken(); // extract the token from the response
+  const token = await getToken();
 
   const data = await getAllProposalById(userId, token);
   if (session?.user?.role !== "client") {
