@@ -50,7 +50,7 @@ export const getAllProposalById = async (id, token) => {
 
 export const patchProposal = async (token, proposalId, status) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/${proposalId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/proposals/reject/${proposalId}`,
     {
       method: "PATCH",
       headers: {
