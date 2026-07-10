@@ -1,10 +1,12 @@
 "use client";
 import { patchProposal } from "@/lib/actions/tasks";
+import { getToken } from "@/lib/actions/tokenGet";
 import { Button, Table } from "@heroui/react";
 import React from "react";
 const ManageProposalsClient = ({ proposal }) => {
   const handleReject = async (proposalId, status) => {
-    const res = await patchProposal(proposalId, { status: "rejected" });
+    const token = await getToken(); // Assuming you have a function to get the token
+    const res = await patchProposal(token, proposalId, { status: "rejected" });
   };
   const handleCheckout = async (proposalId) => {
     // // Implementation for handling checkout
