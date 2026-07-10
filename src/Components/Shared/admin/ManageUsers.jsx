@@ -4,53 +4,54 @@ import { getToken } from "@/lib/actions/tokenGet";
 import { Button, Modal, Table } from "@heroui/react";
 import { Rocket } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import { Bounce, toast } from "react-toastify";
 
 const ManageUsers = ({ user }) => {
   const router = useRouter();
+
+  // Guard clause against empty row evaluations
+  if (!user) return null;
+
+  const currentStatus = user?.userState || "unblocked";
+
   const handleUserStateChange = async (userId, userState) => {
-    const token = await getToken();
-    const newState = userState === "unblocked" ? "blocked" : "unblocked";
-    const res = await patchUser(userId, { userState: newState }, token);
-    if (res.success) {
-      toast.success(`User has been ${newState}`, {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      router.refresh();
-    } else {
+    try {
+      const token = await getToken();
+      const newState = userState === "unblocked" ? "blocked" : "unblocked";
+      const res = await patchUser(userId, { userState: newState }, token);
+
+      if (res && res.success) {
+        toast.success(`User has been ${newState}`, {
+          position: "top-center",
+          autoClose: 1000,
+          theme: "light",
+          transition: Bounce,
+        });
+        router.refresh();
+      } else {
+        throw new Error("Action failed");
+      }
+    } catch (err) {
       toast.error("Failed to update user state", {
         position: "top-center",
         autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
         theme: "light",
         transition: Bounce,
       });
     }
   };
+
   return (
     <Table.Row>
-      <Table.Cell>{user.name}</Table.Cell>
-      <Table.Cell>{user.role}</Table.Cell>
-
-      <Table.Cell>{user.email}</Table.Cell>
+      <Table.Cell>{user?.name || "Unknown Name"}</Table.Cell>
+      <Table.Cell>{user?.role || "user"}</Table.Cell>
+      <Table.Cell>{user?.email || "No Email Provided"}</Table.Cell>
       <Table.Cell>
-        {user.role !== "admin" && (
+        {user?.role !== "admin" && (
           <Modal>
             <Button variant="secondary">
-              {user.userState === "unblocked" ? "Block User" : "Unblock User"}
+              {currentStatus === "unblocked" ? "Block User" : "Unblock User"}
             </Button>
             <Modal.Backdrop>
               <Modal.Container>
@@ -61,30 +62,25 @@ const ManageUsers = ({ user }) => {
                       <Rocket className="size-5" />
                     </Modal.Icon>
                     <Modal.Heading>
-                      {" "}
-                      {user.userState === "unblocked"
-                        ? "Block"
-                        : "Unblock"}{" "}
-                      User
+                      {currentStatus === "unblocked" ? "Block" : "Unblock"} User
                     </Modal.Heading>
                   </Modal.Header>
                   <Modal.Body>
                     <p>
-                      Currently, this user is {user.userState}. Are you sure you
+                      Currently, this user is {currentStatus}. Are you sure you
                       want to{" "}
-                      {user.userState === "unblocked" ? "block" : "unblock"}{" "}
-                      this user?
+                      {currentStatus === "unblocked" ? "block" : "unblock"} this
+                      user?
                     </p>
                   </Modal.Body>
                   <Modal.Footer>
                     <Button
                       size="sm"
-                      type="close"
                       onClick={() =>
-                        handleUserStateChange(user._id, user.userState)
+                        handleUserStateChange(user._id, currentStatus)
                       }
                     >
-                      {user.userState === "unblocked"
+                      {currentStatus === "unblocked"
                         ? "Block User"
                         : "Unblock User"}
                     </Button>

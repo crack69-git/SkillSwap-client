@@ -6,23 +6,24 @@ import {
 import { getAllRevenue } from "@/lib/actions/payments";
 import { getTasks } from "@/lib/actions/tasks";
 import { getToken } from "@/lib/actions/tokenGet";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import React from "react";
 import { FcParallelTasks } from "react-icons/fc";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { RiProgress6Line } from "react-icons/ri";
 import { VscCopilotSuccess } from "react-icons/vsc";
-
 const InfoTrace = async ({ user }) => {
-  console.log("user in InfoTrace:", user);
-  const userId = user?.id;
-  const token = await getToken(); // extract the token from the response
-  const users = await getAllUsers(token);
-  const res = await getTasks(token);
-  const userProposals = await getProposals(user?.email, token);
-  const Earning = await getSumOfPayments(user?.email, token);
+  console.log("user", user.role);
+  const token = await getToken();
+
+  const users = (await getAllUsers(token)) || [];
+
+  const res = (await getTasks(token)) || [];
+
   const revenue = await getAllRevenue(token);
+
+  const userProposals = (await getProposals(user?.email, token)) || [];
+
+  const Earning = await getSumOfPayments(user?.email, token);
 
   const client = (
     <>
@@ -39,7 +40,7 @@ const InfoTrace = async ({ user }) => {
           Pending Tasks
         </p>
         <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "Open").length}
+          {res.filter((task) => task?.status === "Open").length}
         </p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
@@ -48,7 +49,7 @@ const InfoTrace = async ({ user }) => {
           Completed Tasks
         </p>
         <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "Completed").length}
+          {res.filter((task) => task?.status === "completed").length}
         </p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
@@ -57,11 +58,12 @@ const InfoTrace = async ({ user }) => {
           In Progress
         </p>
         <p className="text-3xl font-bold">
-          {res.filter((task) => task.status === "in-progress").length}
+          {res.filter((task) => task?.status === "in-progress").length}
         </p>
       </div>
     </>
   );
+
   const freelancers = (
     <>
       <div className="border p-4 rounded-2xl h-full">
@@ -77,7 +79,7 @@ const InfoTrace = async ({ user }) => {
           Pending Proposals
         </p>
         <p className="text-2xl text-center">
-          {userProposals.filter((task) => task.status === "accepted").length}
+          {userProposals.filter((task) => task?.status === "accepted").length}
         </p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
@@ -86,7 +88,7 @@ const InfoTrace = async ({ user }) => {
           Accepted Proposals
         </p>
         <p className="text-2xl text-center">
-          {userProposals.filter((task) => task.status === "completed").length}
+          {userProposals.filter((task) => task?.status === "completed").length}
         </p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
@@ -98,6 +100,7 @@ const InfoTrace = async ({ user }) => {
       </div>
     </>
   );
+
   const admin = (
     <>
       <div className="border p-4 rounded-2xl h-full">
@@ -105,7 +108,7 @@ const InfoTrace = async ({ user }) => {
           <FcParallelTasks />
           Total Users
         </p>
-        <p className="text-2xl font-bold text-center">{users.length - 1}</p>
+        <p className="text-2xl font-bold text-center">{users.length}</p>
       </div>
       <div className="border p-4 rounded-2xl h-full">
         <p className="flex items-center gap-2 text-xl font-bold">
@@ -128,12 +131,13 @@ const InfoTrace = async ({ user }) => {
           <RiProgress6Line />
           Active Tasks
         </p>
-        <p className="text-3xl font-bold  text-center">
-          {res.filter((task) => task.status === "in-progress").length}
+        <p className="text-3xl font-bold text-center">
+          {res.filter((task) => task?.status === "in-progress").length}
         </p>
       </div>
     </>
   );
+
   return (
     <div className="mt-10 grid grid-cols-4 gap-10 max-sm:grid-cols-1 max-md:grid-cols-2">
       {user?.role === "client"

@@ -22,7 +22,7 @@ export const createTask = async (data, token) => {
 };
 
 export const getTasks = async (token) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/get`, {
     method: "GET",
     headers: {
       authorization: `Bearer ${token}`,

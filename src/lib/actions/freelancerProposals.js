@@ -94,6 +94,9 @@ export const getSumOfPayments = async (freelancerEmail, token) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/payments/total/${encodeURIComponent(freelancerEmail)}`,
     {
       method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
   return res.json();

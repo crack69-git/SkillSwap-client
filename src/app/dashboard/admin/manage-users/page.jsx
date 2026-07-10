@@ -2,14 +2,12 @@ import ManageUsers from "@/Components/Shared/admin/ManageUsers";
 import { getAllUsers } from "@/lib/actions/admin";
 import { getToken } from "@/lib/actions/tokenGet";
 import { auth } from "@/lib/auth";
-import { Button, Table } from "@heroui/react";
+import { Table } from "@heroui/react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
 
 const page = async () => {
-  const token = await getToken();
-  const users = await getAllUsers(token);
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -17,6 +15,20 @@ const page = async () => {
   if (session?.user?.role !== "admin") {
     redirect("/unauthorize");
   }
+
+  // 1. Safely retrieve the token and users list
+  let token = null;
+  let fetchedUsers = [];
+
+  try {
+    token = await getToken();
+    fetchedUsers = await getAllUsers(token);
+  } catch (error) {
+    console.error("Failed to fetch users backend data:", error);
+  }
+
+  // 2. Guarantee it's a valid array so it won't crash Vercel execution
+  const safeUsers = Array.isArray(fetchedUsers) ? fetchedUsers : [];
 
   return (
     <div className="w-11/12 mx-auto my-5">
@@ -28,14 +40,23 @@ const page = async () => {
               <Table.Header>
                 <Table.Column isRowHeader>Name</Table.Column>
                 <Table.Column>Role</Table.Column>
-
                 <Table.Column>Email</Table.Column>
                 <Table.Column>Status</Table.Column>
               </Table.Header>
               <Table.Body>
-                {users.map((user, index) => (
-                  <ManageUsers key={index} user={user} />
-                ))}
+                {safeUsers.length > 0 ? (
+                  safeUsers.map((user, index) => (
+                    <ManageUsers key={user?._id || index} user={user} />
+                  ))
+                ) : (
+                  // Safe fallback if there are zero users or connection is broken
+                  <Table.Row>
+                    <Table.Cell>No users found</Table.Cell>
+                    <Table.Cell>-</Table.Cell>
+                    <Table.Cell>-</Table.Cell>
+                    <Table.Cell>-</Table.Cell>
+                  </Table.Row>
+                )}
               </Table.Body>
             </Table.Content>
           </Table.ScrollContainer>
